@@ -6,5 +6,4 @@ import com.tw.model.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
-	
 }
