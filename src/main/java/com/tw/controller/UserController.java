@@ -18,13 +18,13 @@ public class UserController {
 
 	@Autowired
 	private UserService userservice;
-	
+
 	@PostMapping("/save")
 	public String saveUser(@RequestBody User user) {
-		String ret=userservice.saveUser(user);
+		String ret = userservice.saveUser(user);
 		return ret;
 	}
-	
+
 	@GetMapping("/listUser")
 	public List<User> getUsers() {
 		return userservice.getUsers();
