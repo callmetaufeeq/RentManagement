@@ -2,6 +2,7 @@ package com.tw.model;
 
 import java.util.Date;
 
+import org.hibernate.annotations.Where;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -13,6 +14,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
+@Where(clause = "status= 1")
 @Table(name = "user")
 public class User {
 
@@ -61,6 +63,17 @@ public class User {
 
 	@Column(name = "join_date")
 	private Date joinDate;
+	
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	@Column(name = "status")
+	private int status;
 
 	public Long getId() {
 		return id;

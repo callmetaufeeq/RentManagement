@@ -10,6 +10,9 @@ public interface UserService {
 
 	List<User> getUsers();
 	
+	String userDelete(Long id);
+	
+	String changeStatus (Long id);
 
 
 }
