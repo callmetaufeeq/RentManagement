@@ -10,29 +10,29 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "Shop Owner")
+@Table(name = "Shop_Owner")
 public class ShopOwner {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long id;
 
-	@Column(name = "Owner Name")
+	@Column(name = "owner_name")
 	private String ownerName;
 
-	@Column(name = "Mobile Number")
+	@Column(name = "mobile_number")
 	private Long mobileNo;
 
-	@Column(name = "Address")
+	@Column(name = "address")
 	private String address;
 
-	@Column(name = "For Work")
+	@Column(name = "for_work")
 	private String forWork;
 
-	@Column(name = "Status")
+	@Column(name = "status")
 	private String status;
 
-	@Column(name = "Date")
+	@Column(name = "date")
 	private Date date;
 
 	public Long getId() {
