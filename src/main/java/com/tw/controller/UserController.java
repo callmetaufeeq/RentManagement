@@ -37,8 +37,9 @@ public class UserController {
 		userservice.userDelete(id);
 		return null;
 	}
+
 	@GetMapping("/changeStatus")
 	public String changeStatus(@PathParam("id") Long id) {
 		return userservice.changeStatus(id);
-} 
+	}
 }

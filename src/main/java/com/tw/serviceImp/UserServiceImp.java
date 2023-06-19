@@ -35,7 +35,7 @@ public class UserServiceImp implements UserService {
 		return "deleted ";
 	}
 
-	@SuppressWarnings("deprecation")
+	@SuppressWarnings("deprecation")	
 	@Override
 	public String changeStatus(Long id) {
 		User obj = new User();

@@ -9,10 +9,9 @@ public interface UserService {
 	String saveUser(User user);
 
 	List<User> getUsers();
-	
-	String userDelete(Long id);
-	
-	String changeStatus (Long id);
 
+	String userDelete(Long id);
+
+	String changeStatus(Long id);
 
 }
