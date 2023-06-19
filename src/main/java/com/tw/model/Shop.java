@@ -2,6 +2,7 @@ package com.tw.model;
 
 import java.util.Date;
 
+import org.hibernate.annotations.Where;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -14,6 +15,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "shop")
+@Where(clause = "status= 1")
 public class Shop {
 	@Id
 	@Column(name = "id")

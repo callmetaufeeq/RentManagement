@@ -39,9 +39,13 @@ public class ShopController {
 	}
 
 	@GetMapping("/delete")
-	public Shop deleteByID(@PathParam("id") Long id) {
+	public String deleteByID(@PathParam("id") Long id) {
         shopService.shopDelete(id);
 		return null;
 	}
 
+	@GetMapping("/changeStatus")
+	public String changeStatus(@PathParam("id") Long id) {
+		return shopService.changeStatus(id);
+	}
 }
