@@ -11,8 +11,8 @@ public interface ShopService {
 
 	Shop getShopById(Long id);
 
-	Shop shopDelete(Long id);
-	
-	//Shop shopUpdate (Long id);
+	String shopDelete(Long id);
 
+	String changeStatus(Long id);
+	
 }

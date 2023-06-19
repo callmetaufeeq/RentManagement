@@ -2,6 +2,7 @@ package com.tw.model;
 
 import java.util.Date;
 
+import org.hibernate.annotations.Where;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -13,7 +14,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "Shop")
+@Table(name = "shop")
+@Where(clause = "status= 1")
 public class Shop {
 	@Id
 	@Column(name = "id")
@@ -32,8 +34,8 @@ public class Shop {
 	@Column(name = "join_date")
 	private Date joinDate;
 
-	@Column(name = "active")
-	private String active;
+	@Column(name = "status")
+	private int status;
 	
 	@CreatedDate
 	@Column(name = "created_date")
@@ -83,12 +85,12 @@ public class Shop {
 		this.joinDate = joinDate;
 	}
 
-	public String getActive() {
-		return active;
+	public int getStatus() {
+		return status;
 	}
 
-	public void setActive(String active) {
-		this.active = active;
+	public void setStatus(int status) {
+		this.status = status;
 	}
 
 	public Date getCreatedOn() {

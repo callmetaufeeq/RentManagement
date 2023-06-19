@@ -14,33 +14,31 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "shop_owner")
-public class ShopOwner {
+@Table(name = "rent")
+public class Rent {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "owner_name")
-	private String ownerName;
-
-	@Column(name = "mobile_number")
-	private Long mobileNo;
-
-	@Column(name = "address")
-	private String address;
-
-	@Column(name = "for_work")
-	private String forWork;
-
-	@Column(name = "status")
-	private int status;
-
-	@Column(name = "date")
-	private Date date;
-	
 	@OneToOne
 	private Shop shop;
+
+	@Column(name = "amount")
+	private double amount;
+
+	@Column(name = "paid")
+	private double paid;
+
+	@Column(name = "remaining")
+	private double remaining;
+
+	@LastModifiedDate
+	@Column(name = "date")
+	private Date date;
+
+	@OneToOne
+	private User user;
 
 	@CreatedDate
 	@Column(name = "created_date")
@@ -50,7 +48,9 @@ public class ShopOwner {
 	@Column(name = "last_modified_date")
 	private Date lastModifiedTime;
 
-	
+	@Column(name = "status")
+	private int status;
+
 	public Long getId() {
 		return id;
 	}
@@ -59,44 +59,36 @@ public class ShopOwner {
 		this.id = id;
 	}
 
-	public String getOwnerName() {
-		return ownerName;
+	public Shop getShop() {
+		return shop;
 	}
 
-	public void setOwnerName(String ownerName) {
-		this.ownerName = ownerName;
+	public void setShop(Shop shop) {
+		this.shop = shop;
 	}
 
-	public Long getMobileNo() {
-		return mobileNo;
+	public double getAmount() {
+		return amount;
 	}
 
-	public void setMobileNo(Long mobileNo) {
-		this.mobileNo = mobileNo;
+	public void setAmount(double amount) {
+		this.amount = amount;
 	}
 
-	public String getAddress() {
-		return address;
+	public double getPaid() {
+		return paid;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public void setPaid(double paid) {
+		this.paid = paid;
 	}
 
-	public String getForWork() {
-		return forWork;
+	public double getRemaining() {
+		return remaining;
 	}
 
-	public void setForWork(String forWork) {
-		this.forWork = forWork;
-	}
-
-	public int getStatus() {
-		return status;
-	}
-
-	public void setStatus(int status) {
-		this.status = status;
+	public void setRemaining(double remaining) {
+		this.remaining = remaining;
 	}
 
 	public Date getDate() {
@@ -107,12 +99,12 @@ public class ShopOwner {
 		this.date = date;
 	}
 
-	public Shop getShop() {
-		return shop;
+	public User getUser() {
+		return user;
 	}
 
-	public void setShop(Shop shop) {
-		this.shop = shop;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public Date getCreatedOn() {
@@ -129,6 +121,14 @@ public class ShopOwner {
 
 	public void setLastModifiedTime(Date lastModifiedTime) {
 		this.lastModifiedTime = lastModifiedTime;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
 	}
 
 }
