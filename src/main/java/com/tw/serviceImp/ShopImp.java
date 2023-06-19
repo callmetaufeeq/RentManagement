@@ -18,7 +18,7 @@ public class ShopImp implements ShopService {
 	@Override
 	public String saveShop(Shop shop) {
 		shopRepository.save(shop);
-		return "save success!";
+		return "saved successfully!";
 	}
 
 	@Override
@@ -33,12 +33,18 @@ public class ShopImp implements ShopService {
 	}
 
 	@Override
-	public Shop delete(Long id) {
-		ShopRepository shopRepository2 = shopRepository;
-		shopRepository2.deleteById(id);
-		System.out.println("Deleted...");
-		return (Shop) shopRepository2;
-		
+	public Shop shopDelete(Long id) {
+		shopRepository.deleteById(id);
+		return null;
 	}
+	/*
+	 * @Override public Shop shopUpdate(Long id) { shopRepository. return null; }
+	 */
+	
+   
+   }
+	 
 
-}
+	
+
+

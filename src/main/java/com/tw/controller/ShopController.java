@@ -20,27 +20,28 @@ public class ShopController {
 
 	@Autowired
 	private ShopService shopService;
-	
+
 	@PostMapping("/save")
-	public String saveUser(@RequestBody Shop shop) {
+	public String saveShop(@RequestBody Shop shop) {
 		String ret = shopService.saveShop(shop);
 		return ret;
 	}
-	
+
 	@GetMapping("/listshop")
 	public List<Shop> getShop() {
 		return shopService.getShop();
 	}
-	
-	
+
 	@GetMapping("/shopById")
 	public Shop getShopById(@PathParam("id") Long id) {
-		
+
 		return shopService.getShopById(id);
 	}
-	
-	@GetMapping("/deleteById")
+
+	@GetMapping("/delete")
 	public Shop deleteByID(@PathParam("id") Long id) {
-		return shopService.delete(id);
+        shopService.shopDelete(id);
+		return null;
 	}
+
 }

@@ -10,8 +10,6 @@ public interface UserService {
 
 	List<User> getUsers();
 	
-//	String userId (User id);
-//	
-//	String userDelete(User id);
+
 
 }

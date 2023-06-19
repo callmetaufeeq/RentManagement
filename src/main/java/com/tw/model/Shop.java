@@ -97,7 +97,7 @@ public class Shop {
 
 	public void setCreatedOn(Date createdOn) {
 		this.createdOn = createdOn;
-	}
+	}  
 
 	public Date getLastModifiedTime() {
 		return lastModifiedTime;
@@ -105,6 +105,7 @@ public class Shop {
 
 	public void setLastModifiedTime(Date lastModifiedTime) {
 		this.lastModifiedTime = lastModifiedTime;
+		
 	}
 
 }

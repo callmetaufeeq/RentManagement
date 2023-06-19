@@ -10,7 +10,9 @@ public interface ShopService {
 	List<Shop> getShop();
 
 	Shop getShopById(Long id);
+
+	Shop shopDelete(Long id);
 	
-	Shop delete(Long id);
+	//Shop shopUpdate (Long id);
 
 }
