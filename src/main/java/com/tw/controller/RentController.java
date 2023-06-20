@@ -44,5 +44,11 @@ public class RentController {
 		return rentService.delete(id);
 
 	}
-
+	
+	@GetMapping("/changeStatus")
+	public String changeStatus(@PathParam("id") Long id) {
+		return rentService.changeStatus(id);
+		
+	}
+	
 }
