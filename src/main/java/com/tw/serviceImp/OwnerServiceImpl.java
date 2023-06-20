@@ -42,6 +42,7 @@ public class OwnerServiceImpl implements OwnerServices {
 		return "Deleted !";
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public String changeStatus(Long id) {
 		ShopOwner obj = ownerRepository.getById(id);

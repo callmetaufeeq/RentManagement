@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tw.model.ShopOwner;
-import com.tw.repository.OwnerRepository;
 import com.tw.service.OwnerServices;
 
 import jakarta.websocket.server.PathParam;

@@ -40,10 +40,11 @@ public class RentServiceImp implements RentService {
 		System.out.println("Deleted Successfully");
 		return (Rent) rentRepository2;
 	}
+
 	@SuppressWarnings("deprecation")
 	@Override
 	public String changeStatus(Long id) {
-		Rent obj = new Rent();
+		Rent obj = rentRepository.getById(id);
 		obj.setStatus(0);
 		rentRepository.save(obj);
 		return "Status changed successfully ";
