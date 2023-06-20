@@ -12,6 +12,8 @@ public interface OwnerServices {
 
 	ShopOwner ownerById(Long id);
 
-	ShopOwner deleteOwner(Long id);
+	String deleteOwner(Long id);
+	
+	String changeStatus(Long id);
 
 }

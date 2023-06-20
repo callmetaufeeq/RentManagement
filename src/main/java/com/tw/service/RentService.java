@@ -12,4 +12,6 @@ public interface RentService {
 	Rent getRentById(Long id);
 
 	Rent delete(Long id);
+	
+	String changeStatus(Long id);
 }
