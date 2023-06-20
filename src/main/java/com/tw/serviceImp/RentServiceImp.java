@@ -49,4 +49,10 @@ public class RentServiceImp implements RentService {
 		return "Status changed successfully ";
 	}
 
+	@Override
+	public double totalAmount() {
+		
+		return null;
+	}
+
 }
