@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tw.model.User;
 import com.tw.service.UserService;
 
+import jakarta.websocket.server.PathParam;
+
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -29,6 +31,16 @@ public class UserController {
 	public List<User> getUsers() {
 		return userservice.getUsers();
 	}
-	
+
+	@GetMapping("/delete")
+	public String deleteByID(@PathParam("id") Long id) {
+		userservice.userDelete(id);
+		return null;
+	}
+
+	@GetMapping("/changeStatus")
+	public String changeStatus(@PathParam("id") Long id) {
+		return userservice.changeStatus(id);
+	}
 	
 }

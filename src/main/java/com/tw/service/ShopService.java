@@ -15,4 +15,5 @@ public interface ShopService {
 
 	String changeStatus(Long id);
 	
+	//String counts (Long id);
 }

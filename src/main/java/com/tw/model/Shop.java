@@ -21,10 +21,10 @@ public class Shop {
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
+	
 	@Column(name = "shop_name")
 	private String nameofshop;
-
+	
 	@Column(name = "rent")
 	private double rent;
 
@@ -36,7 +36,18 @@ public class Shop {
 
 	@Column(name = "status")
 	private int status;
-	
+
+	@Column(name = "rented")
+	private double rented = 0.0;
+
+	public double getRented() {
+		return rented;
+	}
+
+	public void setRented(double rented) {
+		this.rented = rented;
+	}
+
 	@CreatedDate
 	@Column(name = "created_date")
 	private Date createdOn;
@@ -70,6 +81,7 @@ public class Shop {
 	}
 
 	public String getAddress() {
+
 		return address;
 	}
 
@@ -99,7 +111,7 @@ public class Shop {
 
 	public void setCreatedOn(Date createdOn) {
 		this.createdOn = createdOn;
-	}  
+	}
 
 	public Date getLastModifiedTime() {
 		return lastModifiedTime;
@@ -107,7 +119,7 @@ public class Shop {
 
 	public void setLastModifiedTime(Date lastModifiedTime) {
 		this.lastModifiedTime = lastModifiedTime;
-		
+
 	}
 
 }

@@ -2,6 +2,7 @@ package com.tw.model;
 
 import java.sql.Date;
 
+import org.hibernate.annotations.Where;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -15,6 +16,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "rent")
+@Where(clause = "status = 1")
 public class Rent {
 	@Id
 	@Column(name = "id")
@@ -22,7 +24,7 @@ public class Rent {
 	private Long id;
 
 	@OneToOne
-	private Shop shop;
+	private ShopOwner shopOwner;
 
 	@Column(name = "amount")
 	private double amount;
@@ -59,12 +61,12 @@ public class Rent {
 		this.id = id;
 	}
 
-	public Shop getShop() {
-		return shop;
+	public ShopOwner getShopOwner() {
+		return shopOwner;
 	}
 
-	public void setShop(Shop shop) {
-		this.shop = shop;
+	public void setShopOwner(ShopOwner shopOwner) {
+		this.shopOwner = shopOwner;
 	}
 
 	public double getAmount() {

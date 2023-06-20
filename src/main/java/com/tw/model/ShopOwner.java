@@ -2,6 +2,7 @@ package com.tw.model;
 
 import java.sql.Date;
 
+import org.hibernate.annotations.Where;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -15,6 +16,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "shop_owner")
+@Where(clause = "status=1")
 public class ShopOwner {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +27,7 @@ public class ShopOwner {
 	private String ownerName;
 
 	@Column(name = "mobile_number")
-	private Long mobileNo;
+	private String mobileNo;
 
 	@Column(name = "address")
 	private String address;
@@ -38,7 +40,7 @@ public class ShopOwner {
 
 	@Column(name = "date")
 	private Date date;
-	
+
 	@OneToOne
 	private Shop shop;
 
@@ -50,7 +52,6 @@ public class ShopOwner {
 	@Column(name = "last_modified_date")
 	private Date lastModifiedTime;
 
-	
 	public Long getId() {
 		return id;
 	}
@@ -67,11 +68,11 @@ public class ShopOwner {
 		this.ownerName = ownerName;
 	}
 
-	public Long getMobileNo() {
+	public String getMobileNo() {
 		return mobileNo;
 	}
 
-	public void setMobileNo(Long mobileNo) {
+	public void setMobileNo(String mobileNo) {
 		this.mobileNo = mobileNo;
 	}
 

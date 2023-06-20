@@ -47,4 +47,6 @@ public class ShopImp implements ShopService {
 		shopRepository.save(obj);
 		return "deleted success!";
 	}
+
+	
 }
