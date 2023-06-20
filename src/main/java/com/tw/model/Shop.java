@@ -36,6 +36,18 @@ public class Shop {
 
 	@Column(name = "status")
 	private int status;
+	
+
+	@Column(name = "rented")
+	private long rented;
+
+	public long getRented() {
+		return rented;
+	}
+
+	public void setRented(long rented) {
+		this.rented = rented;
+	}
 
 	@CreatedDate
 	@Column(name = "created_date")
