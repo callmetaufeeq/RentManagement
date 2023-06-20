@@ -21,10 +21,10 @@ public class Shop {
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
+	
 	@Column(name = "shop_name")
 	private String nameofshop;
-
+	
 	@Column(name = "rent")
 	private double rent;
 
@@ -36,16 +36,15 @@ public class Shop {
 
 	@Column(name = "status")
 	private int status;
-	
 
 	@Column(name = "rented")
-	private long rented;
+	private double rented = 0.0;
 
-	public long getRented() {
+	public double getRented() {
 		return rented;
 	}
 
-	public void setRented(long rented) {
+	public void setRented(double rented) {
 		this.rented = rented;
 	}
 
