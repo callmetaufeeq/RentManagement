@@ -15,5 +15,9 @@ public interface RentService {
 	
 	String changeStatus(Long id);
 	
-	double totalAmount();
+	public Long totalAmount();
+	
+	public Long paidAmount();
+	
+	public Long remainingAmount();
 }
