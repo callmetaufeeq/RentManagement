@@ -13,5 +13,7 @@ public interface UserService {
 	String userDelete(Long id);
 
 	String changeStatus(Long id);
+	
+	
 
 }

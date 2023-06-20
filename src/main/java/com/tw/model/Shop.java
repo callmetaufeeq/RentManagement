@@ -80,6 +80,7 @@ public class Shop {
 	public Date getJoinDate() {
 		return joinDate;
 	}
+	
 
 	public void setJoinDate(Date joinDate) {
 		this.joinDate = joinDate;

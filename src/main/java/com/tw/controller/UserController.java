@@ -42,4 +42,5 @@ public class UserController {
 	public String changeStatus(@PathParam("id") Long id) {
 		return userservice.changeStatus(id);
 	}
+	
 }

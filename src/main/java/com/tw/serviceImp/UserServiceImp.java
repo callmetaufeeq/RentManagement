@@ -14,6 +14,7 @@ public class UserServiceImp implements UserService {
 
 	@Autowired
 	private UserRepository userrepo;
+	
 
 	@Override
 	public String saveUser(User user) {
@@ -38,7 +39,7 @@ public class UserServiceImp implements UserService {
 	@SuppressWarnings("deprecation")	
 	@Override
 	public String changeStatus(Long id) {
-		User obj = new User();
+		User obj=userrepo.getById(id);
 		obj.setStatus(0);
 		userrepo.save(obj);
 		return "deleted successfully!";
