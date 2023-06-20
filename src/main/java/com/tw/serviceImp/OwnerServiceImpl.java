@@ -37,9 +37,17 @@ public class OwnerServiceImpl implements OwnerServices {
 	}
 
 	@Override
-	public ShopOwner deleteOwner(Long id) {
+	public String deleteOwner(Long id) {
 		ownerRepository.deleteById(id);
-		return null;
+		return "Deleted !";
+	}
+
+	@Override
+	public String changeStatus(Long id) {
+		ShopOwner obj = ownerRepository.getById(id);
+		obj.setStatus(0);
+		ownerRepository.save(obj);
+		return "Deleted !";
 	}
 
 }
