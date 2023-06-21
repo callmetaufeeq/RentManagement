@@ -34,18 +34,32 @@ public class ShopController {
 
 	@GetMapping("/shopById")
 	public Shop getShopById(@PathParam("id") Long id) {
-
 		return shopService.getShopById(id);
 	}
 
 	@GetMapping("/delete")
 	public String deleteByID(@PathParam("id") Long id) {
-        shopService.shopDelete(id);
-		return null;
+		return shopService.shopDelete(id);
 	}
 
 	@GetMapping("/changeStatus")
 	public String changeStatus(@PathParam("id") Long id) {
 		return shopService.changeStatus(id);
 	}
+
+	@GetMapping("/totalShops")
+	public int totalShops() {
+		return shopService.shop();
+	}
+
+	@GetMapping("/rentedShops")
+	public int rentShop() {
+		return shopService.rentShop();
+	}
+
+	@GetMapping("/leftShop")
+	public int leftShop() {
+		return shopService.leftShop();
+	}
+
 }

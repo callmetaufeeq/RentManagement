@@ -14,6 +14,11 @@ public interface ShopService {
 	String shopDelete(Long id);
 
 	String changeStatus(Long id);
+
+	public int shop();
+
+	public int rentShop();
+	 
+	public int leftShop();
 	
-	//String counts (Long id);
 }
