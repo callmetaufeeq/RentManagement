@@ -36,7 +36,18 @@ public class Shop {
 
 	@Column(name = "status")
 	private int status;
-	
+
+	@Column(name = "rented")
+	private int rented = 0;
+
+	public int getRented() {
+		return rented;
+	}
+
+	public void setRented(int rented) {
+		this.rented = rented;
+	}
+
 	@CreatedDate
 	@Column(name = "created_date")
 	private Date createdOn;
@@ -70,6 +81,7 @@ public class Shop {
 	}
 
 	public String getAddress() {
+
 		return address;
 	}
 
@@ -99,7 +111,7 @@ public class Shop {
 
 	public void setCreatedOn(Date createdOn) {
 		this.createdOn = createdOn;
-	}  
+	}
 
 	public Date getLastModifiedTime() {
 		return lastModifiedTime;
@@ -107,7 +119,7 @@ public class Shop {
 
 	public void setLastModifiedTime(Date lastModifiedTime) {
 		this.lastModifiedTime = lastModifiedTime;
-		
+
 	}
 
 }

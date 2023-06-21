@@ -42,9 +42,30 @@ public class ShopImp implements ShopService {
 	@SuppressWarnings("deprecation")
 	@Override
 	public String changeStatus(Long id) {
-		Shop obj=shopRepository.getById(id);
+		Shop obj = shopRepository.getById(id);
 		obj.setStatus(0);
 		shopRepository.save(obj);
-		return "deleted success!";
+		return "Changed successfully!";
 	}
+
+	@Override
+	public int shop() {
+		int totalShop = shopRepository.totalShop();
+		return totalShop;
+	}
+
+
+	@Override
+	public int rentShop() {
+		int rentShop = shopRepository.rentedShop();
+		return rentShop;
+	}
+
+	@Override
+	public int leftShop() {
+		int leftShop = shopRepository.leftedShop();
+		return leftShop; 
+	}
+
+	
 }
