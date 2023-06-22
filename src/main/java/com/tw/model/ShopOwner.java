@@ -43,7 +43,7 @@ public class ShopOwner {
 
 	@OneToOne
 	private Shop shop;
-
+	
 	@CreatedDate
 	@Column(name = "created_date")
 	private Date createdOn;
