@@ -11,6 +11,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -33,20 +34,24 @@ public class Shop {
 
 	@Column(name = "join_date")
 	private Date joinDate;
+	
+	
+	@Column(name="rent_type")
+	private String rentType;
+
+	public String getRentType() {
+		return rentType;
+	}
+
+	public void setRentType(String rentType) {
+		this.rentType = rentType;
+	}
 
 	@Column(name = "status")
-	private int status;
+	private int status =1;
 
 	@Column(name = "rented")
 	private int rented = 0;
-
-	public int getRented() {
-		return rented;
-	}
-
-	public void setRented(int rented) {
-		this.rented = rented;
-	}
 
 	@CreatedDate
 	@Column(name = "created_date")
@@ -55,6 +60,17 @@ public class Shop {
 	@LastModifiedDate
 	@Column(name = "last_modified_date")
 	private Date lastModifiedTime;
+	
+	@ManyToOne
+	private Category category;
+
+	public int getRented() {
+		return rented;
+	}
+
+	public void setRented(int rented) {
+		this.rented = rented;
+	}
 
 	public Long getId() {
 		return id;
@@ -120,6 +136,14 @@ public class Shop {
 	public void setLastModifiedTime(Date lastModifiedTime) {
 		this.lastModifiedTime = lastModifiedTime;
 
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 
 }
