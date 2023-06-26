@@ -2,6 +2,7 @@ package com.tw.model;
 
 import java.sql.Date;
 
+import org.hibernate.annotations.Where;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -14,7 +15,9 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "category")
+@Where(clause = "status=1")
 public class Category {
+
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +28,7 @@ public class Category {
 
 	@Column(name = "category_code")
 	public String categoryCode;
-	
+
 	@CreatedDate
 	@Column(name = "created_date")
 	private Date createdOn;
@@ -33,6 +36,9 @@ public class Category {
 	@LastModifiedDate
 	@Column(name = "last_modified_date")
 	private Date lastModifiedTime;
+
+	@Column(name = "status")
+	private int status = 1;
 
 	public Long getId() {
 		return id;
@@ -72,6 +78,14 @@ public class Category {
 
 	public void setLastModifiedTime(Date lastModifiedTime) {
 		this.lastModifiedTime = lastModifiedTime;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
 	}
 
 }

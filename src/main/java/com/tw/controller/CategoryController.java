@@ -1,5 +1,7 @@
 package com.tw.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,4 +31,16 @@ public class CategoryController {
 	public String changeStatus(@PathParam("id") Long id) {
 		return categoryService.changeStatus(id);
 	}
+	
+	@GetMapping("/categorylist")
+	public List<Category>getCategory() {
+		return categoryService.getCategory();
+	}
+	
+	@GetMapping("/delete")
+	public String deleteById(@PathParam("id")Long id) {
+		
+		return categoryService.categoryDelete(id);
+	}
+	
 }
