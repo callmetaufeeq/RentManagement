@@ -20,4 +20,6 @@ public interface RentService {
 	public Long paidAmount();
 	
 	public Long remainingAmount();
+	
+	public List<Rent> findByShopOwnerId(Long id);
 }

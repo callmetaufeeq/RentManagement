@@ -69,5 +69,10 @@ public class RentController {
 	public Long remainingAmount() {
 		return rentService.remainingAmount();
 	}
-
+	
+	@GetMapping("/shopOwnerById")
+	public List<Rent> findByShopOwnerId(@PathParam("id") Long id){
+		return rentService.findByShopOwnerId(id);
+		
+	}
 }

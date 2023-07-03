@@ -66,4 +66,9 @@ public class RentServiceImp implements RentService {
 		return rentRepository.remainingAmount();
 	}
 
+	@Override
+	public List<Rent> findByShopOwnerId(Long id) {
+		return rentRepository.findByShopOwnerId(id);
+	}
+
 }

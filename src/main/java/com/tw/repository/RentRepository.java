@@ -1,5 +1,7 @@
 package com.tw.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -15,5 +17,7 @@ public interface RentRepository extends JpaRepository<Rent, Long> {
 	
 	@Query(value = " SELECT sum(remaining) FROM Rent")
 	public Long remainingAmount();
+	
+	public List<Rent> findByShopOwnerId(Long id);
 	
 }

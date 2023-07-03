@@ -11,6 +11,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -23,7 +24,7 @@ public class Rent {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@OneToOne
+	@ManyToOne
 	private ShopOwner shopOwner;
 
 	@Column(name = "amount")
@@ -39,8 +40,19 @@ public class Rent {
 	@Column(name = "date")
 	private Date date;
 
-	@OneToOne
+	@ManyToOne
 	private User user;
+	
+	@Column (name = "payment_type")
+	private String paymentType;
+
+	public String getPaymentType() {
+		return paymentType;
+	}
+
+	public void setPaymentType(String paymentType) {
+		this.paymentType = paymentType;
+	}
 
 	@CreatedDate
 	@Column(name = "created_date")
@@ -52,6 +64,17 @@ public class Rent {
 
 	@Column(name = "status")
 	private int status;
+	
+	@Column(name ="year")
+	private String year;
+
+	public String getYear() {
+		return year;
+	}
+
+	public void setYear(String year) {
+		this.year = year;
+	}
 
 	public Long getId() {
 		return id;
