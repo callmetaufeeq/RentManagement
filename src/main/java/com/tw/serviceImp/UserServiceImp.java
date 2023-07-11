@@ -1,6 +1,7 @@
 package com.tw.serviceImp;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,6 +44,12 @@ public class UserServiceImp implements UserService {
 		obj.setStatus(0);
 		userrepo.save(obj);
 		return "deleted successfully!";
+	}
+
+	@Override
+	public User findById(Long id) {
+		Optional<User> findById = userrepo.findById(id);
+		return findById.get();
 	}
 
 }

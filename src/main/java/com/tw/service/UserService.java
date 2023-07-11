@@ -9,6 +9,8 @@ public interface UserService {
 	String saveUser(User user);
 
 	List<User> getUsers();
+	
+	User findById(Long id);
 
 	String userDelete(Long id);
 
