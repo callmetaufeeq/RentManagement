@@ -3,6 +3,7 @@ package com.tw.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,6 +17,7 @@ import jakarta.websocket.server.PathParam;
 
 @RestController
 @RequestMapping("/owners")
+@CrossOrigin
 public class OwnerController {
 	@Autowired
 	private OwnerServices ownerServices;
@@ -26,7 +28,7 @@ public class OwnerController {
 		return saveUser;
 	}
 
-	@GetMapping("/owners")
+	@GetMapping("/list")
 	public List<ShopOwner> getShopOwner() {
 		return ownerServices.getShopOwner();
 	}
