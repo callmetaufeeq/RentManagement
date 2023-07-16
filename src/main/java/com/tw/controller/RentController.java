@@ -3,6 +3,7 @@ package com.tw.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +16,7 @@ import com.tw.service.RentService;
 import jakarta.websocket.server.PathParam;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/rent")
 public class RentController {
 
