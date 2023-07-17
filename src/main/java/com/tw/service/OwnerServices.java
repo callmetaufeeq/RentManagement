@@ -2,11 +2,12 @@ package com.tw.service;
 
 import java.util.List;
 
+import com.tw.dto.ShopTenant;
 import com.tw.model.ShopOwner;
 
 public interface OwnerServices {
 
-	String saveUser(ShopOwner shopOwner);
+	String saveUser(ShopTenant shopOwner);
 
 	List<ShopOwner> getShopOwner();
 

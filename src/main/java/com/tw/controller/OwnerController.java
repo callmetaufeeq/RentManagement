@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tw.dto.ShopTenant;
 import com.tw.model.ShopOwner;
 import com.tw.service.OwnerServices;
 
@@ -23,7 +24,7 @@ public class OwnerController {
 	private OwnerServices ownerServices;
 
 	@PostMapping("/save")
-	public String owners(@RequestBody ShopOwner shopOwner) {
+	public String owners(@RequestBody ShopTenant shopOwner) {
 		String saveUser = ownerServices.saveUser(shopOwner);
 		return saveUser;
 	}

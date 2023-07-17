@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.tw.dto.ShopTenant;
 import com.tw.model.Shop;
 import com.tw.model.ShopOwner;
 import com.tw.repository.OwnerRepository;
@@ -23,16 +24,26 @@ public class OwnerServiceImpl implements OwnerServices {
 	
 	@SuppressWarnings("deprecation")
 	@Override
-	public String saveUser(ShopOwner shopOwner) {
+	public String saveUser(ShopTenant shopdto) {
 		String ret = "";
-		ShopOwner shopowner = ownerRepository.findByShopId(shopOwner.getShop().getId());
-		if (shopowner != null && shopowner.getShop().getId() > 0) {
+		ShopOwner obj=new ShopOwner();
+		obj.setId(shopdto.getId());
+		obj.setAddress(shopdto.getAddress());
+		obj.setDate(shopdto.getDate());
+		obj.setForWork(shopdto.getForWork());
+		obj.setMobileNo(shopdto.getMobileNo());
+		obj.setOwnerName(shopdto.getOwnerName());
+		Shop shopobj=new Shop();
+		shopobj.setId(shopdto.getShopId());
+		obj.setShop(shopobj);
+		ShopOwner s= ownerRepository.findByShopId(obj.getShop().getId());
+		if (s != null && s.getShop().getId() > 0) {
 			ret = "shop already assign to owner!";
 		} else {
-			Shop shop = shopRepo.getById(shopOwner.getShop().getId());
+			Shop shop = shopRepo.getById(obj.getShop().getId());
 			shop.setRented(1);
 			shopRepo.save(shop);
-			ShopOwner save = ownerRepository.save(shopOwner);
+			ShopOwner save = ownerRepository.save(obj);
 			if (save != null)
 				ret = "Save success";
 		}

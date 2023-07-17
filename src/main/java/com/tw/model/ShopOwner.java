@@ -36,7 +36,7 @@ public class ShopOwner {
 	private String forWork;
 
 	@Column(name = "status")
-	private int status;
+	private int status=1;
 
 	@Column(name = "date")
 	private Date date;
