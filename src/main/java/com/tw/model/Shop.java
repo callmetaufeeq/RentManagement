@@ -22,9 +22,11 @@ public class Shop {
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@ManyToOne
+	private Category category;
 
 	@Column(name = "shop_name")
-	private String nameofshop;
+	private String shopName;
 
 	@Column(name = "rent")
 	private double rent;
@@ -34,21 +36,12 @@ public class Shop {
 
 	@Column(name = "join_date")
 	private Date joinDate;
-	
-	
-	@Column(name="rent_type")
+
+	@Column(name = "rent_type")
 	private String rentType;
 
-	public String getRentType() {
-		return rentType;
-	}
-
-	public void setRentType(String rentType) {
-		this.rentType = rentType;
-	}
-
 	@Column(name = "status")
-	private int status =1;
+	private int status = 1;
 
 	@Column(name = "rented")
 	private int rented = 0;
@@ -60,10 +53,19 @@ public class Shop {
 	@LastModifiedDate
 	@Column(name = "last_modified_date")
 	private Date lastModifiedTime;
-	
-	@ManyToOne
-	private Category category;
 
+	@Column(name = "shop_code")
+	private String shopCode;
+
+	public String getShopCode() {
+		return shopCode;
+	}
+
+	public void setShopCode(String shopCode) {
+		this.shopCode = shopCode;
+	}
+
+	
 	public int getRented() {
 		return rented;
 	}
@@ -80,12 +82,12 @@ public class Shop {
 		this.id = id;
 	}
 
-	public String getNameofshop() {
-		return nameofshop;
+	public String getshopName() {
+		return shopName;
 	}
 
-	public void setNameofshop(String nameofshop) {
-		this.nameofshop = nameofshop;
+	public void setshopName(String shopName) {
+		this.shopName = shopName;
 	}
 
 	public double getRent() {
@@ -146,4 +148,11 @@ public class Shop {
 		this.category = category;
 	}
 
+	public String getRentType() {
+		return rentType;
+	}
+
+	public void setRentType(String rentType) {
+		this.rentType = rentType;
+	}
 }

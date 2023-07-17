@@ -3,6 +3,7 @@ package com.tw.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,6 +17,7 @@ import jakarta.websocket.server.PathParam;
 
 @RestController
 @RequestMapping("/category")
+@CrossOrigin
 public class CategoryController {
 	
 	@Autowired
@@ -32,7 +34,7 @@ public class CategoryController {
 		return categoryService.changeStatus(id);
 	}
 	
-	@GetMapping("/categorylist")
+	@GetMapping("/list")
 	public List<Category>getCategory() {
 		return categoryService.getCategory();
 	}

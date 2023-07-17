@@ -24,7 +24,7 @@ public class ShopImp implements ShopService {
 
 	@Override
 	public List<Shop> getShop() {
-		return shopRepository.findAll();
+		return shopRepository.findAllByOrderByIdDesc();
 	}
 
 	@Override
@@ -65,6 +65,19 @@ public class ShopImp implements ShopService {
 	public int leftShop() {
 		int leftShop = shopRepository.leftedShop();
 		return leftShop; 
+	}
+
+	@Override
+	public List<Shop> categoryId(Long id) {
+		
+	/*	if (id != null) {
+			Shop byId = shopRepository.getById(id);
+			return (List<Shop>) byId;
+		}else {
+			*/
+		
+			return shopRepository.findByCategoryId(id);
+	//}
 	}
 
 	
