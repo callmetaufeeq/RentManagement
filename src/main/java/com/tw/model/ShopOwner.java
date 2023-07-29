@@ -44,6 +44,9 @@ public class ShopOwner {
 	@OneToOne
 	private Shop shop;
 	
+	@Column(name = "year")
+	private Date year;
+	
 	@CreatedDate
 	@Column(name = "created_date")
 	private Date createdOn;
@@ -51,6 +54,9 @@ public class ShopOwner {
 	@LastModifiedDate
 	@Column(name = "last_modified_date")
 	private Date lastModifiedTime;
+	
+	
+	
 
 	public Long getId() {
 		return id;
@@ -132,4 +138,13 @@ public class ShopOwner {
 		this.lastModifiedTime = lastModifiedTime;
 	}
 
+	public Date getYear() {
+		return year;
+	}
+
+	public void setYear(Date year) {
+		this.year = year;
+	}
+
+	
 }

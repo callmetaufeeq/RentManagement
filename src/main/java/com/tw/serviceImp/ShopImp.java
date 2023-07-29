@@ -80,5 +80,10 @@ public class ShopImp implements ShopService {
 	//}
 	}
 
+	@Override
+	public List<Shop> getShopByRent() {
+		return shopRepository.getShopByRented();
+	}
+
 	
 }

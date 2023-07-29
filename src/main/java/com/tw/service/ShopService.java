@@ -22,6 +22,8 @@ public interface ShopService {
 	public int leftShop();
 	
 	public List<Shop> categoryId(Long id);
+	
+	public List<Shop> getShopByRent();
 
 
 }

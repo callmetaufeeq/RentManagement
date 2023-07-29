@@ -69,5 +69,9 @@ public class ShopController {
 		return shopService.categoryId(id);
 	}
 
+	@GetMapping("/notRended")
+	public List<Shop> getShopByRent(){
+		return shopService.getShopByRent();
+	}
 
 }

@@ -23,4 +23,7 @@ public interface ShopRepository extends JpaRepository<Shop, Long> {
 
 	public List<Shop> findAllByOrderByIdDesc();
 	
+	@Query("SELECT u FROM Shop u WHERE u.rented = 0")
+	public List<Shop> getShopByRented();
+	
 }
