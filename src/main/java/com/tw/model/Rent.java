@@ -12,7 +12,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -42,8 +41,8 @@ public class Rent {
 
 	@ManyToOne
 	private User user;
-	
-	@Column (name = "payment_type")
+
+	@Column(name = "payment_type")
 	private String paymentType;
 
 	public String getPaymentType() {
@@ -64,8 +63,8 @@ public class Rent {
 
 	@Column(name = "status")
 	private int status;
-	
-	@Column(name ="year")
+
+	@Column(name = "year")
 	private String year;
 
 	public String getYear() {

@@ -6,6 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.tw.customRepo.RentExternalRepo;
+import com.tw.dto.RentDto;
 import com.tw.model.Rent;
 import com.tw.repository.RentRepository;
 import com.tw.service.RentService;
@@ -15,6 +17,9 @@ public class RentServiceImp implements RentService {
 
 	@Autowired
 	RentRepository rentRepository;
+	
+	@Autowired 
+	RentExternalRepo rentExternalRepo;
 
 	@Override
 	public String saveRent(Rent rent) {
@@ -69,6 +74,13 @@ public class RentServiceImp implements RentService {
 	@Override
 	public List<Rent> findByShopOwnerId(Long id) {
 		return rentRepository.findByShopOwnerId(id);
+	}
+
+	@Override
+	public List<RentDto> findSum(Long id, String year) {
+		List<RentDto> list= rentExternalRepo.findSum(id, year);
+		
+		return list;
 	}
 
 }

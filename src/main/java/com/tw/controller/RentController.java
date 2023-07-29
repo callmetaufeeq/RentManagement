@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tw.dto.RentDto;
 import com.tw.model.Rent;
 import com.tw.service.RentService;
 
@@ -77,4 +78,10 @@ public class RentController {
 		return rentService.findByShopOwnerId(id);
 		
 	}
+	@GetMapping("/sumOfRent")
+	public List<RentDto> findSum(@PathParam("id") Long id, @PathParam("year") String year){
+		return rentService.findSum(id, year);
+		
+	}
+
 }

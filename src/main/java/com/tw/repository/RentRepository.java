@@ -20,4 +20,5 @@ public interface RentRepository extends JpaRepository<Rent, Long> {
 	
 	public List<Rent> findByShopOwnerId(Long id);
 	
+
 }

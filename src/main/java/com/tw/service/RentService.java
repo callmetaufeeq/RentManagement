@@ -2,6 +2,7 @@ package com.tw.service;
 
 import java.util.List;
 
+import com.tw.dto.RentDto;
 import com.tw.model.Rent;
 
 public interface RentService {
@@ -22,4 +23,6 @@ public interface RentService {
 	public Long remainingAmount();
 	
 	public List<Rent> findByShopOwnerId(Long id);
+	
+	public List<RentDto> findSum(Long id , String year);
 }
