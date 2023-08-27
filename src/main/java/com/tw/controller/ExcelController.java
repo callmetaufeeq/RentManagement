@@ -34,7 +34,7 @@ public class ExcelController {
         String headerValue = "attachment; filename=Rent" + currentDateTime + ".xlsx";
         response.setHeader(headerKey, headerValue);
 
-        List <Rent> listRent = rentService.getRent();
+        List <Rent> listRent = (List<Rent>) rentService.getRent();
         RentExcelExporter generator = new RentExcelExporter(listRent);
         generator.generateExcelFile(response);
     }

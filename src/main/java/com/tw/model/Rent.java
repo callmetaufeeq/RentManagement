@@ -3,25 +3,24 @@ package com.tw.model;
 import java.sql.Date;
 
 import org.hibernate.annotations.Where;
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+
+import com.tw.generics.AbstractPersistable;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "rent")
-@Where(clause = "status = 1")
-public class Rent {
-	@Id
-	@Column(name = "id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+//@Where(clause = "status = 1")
+@Where(clause = "deleted=false")
+public class Rent extends AbstractPersistable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@ManyToOne
 	private ShopOwner shopOwner;
@@ -53,14 +52,6 @@ public class Rent {
 		this.paymentType = paymentType;
 	}
 
-	@CreatedDate
-	@Column(name = "created_date")
-	private Date createdOn;
-
-	@LastModifiedDate
-	@Column(name = "last_modified_date")
-	private Date lastModifiedTime;
-
 	@Column(name = "status")
 	private int status;
 
@@ -73,14 +64,6 @@ public class Rent {
 
 	public void setYear(String year) {
 		this.year = year;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public ShopOwner getShopOwner() {
@@ -129,22 +112,6 @@ public class Rent {
 
 	public void setUser(User user) {
 		this.user = user;
-	}
-
-	public Date getCreatedOn() {
-		return createdOn;
-	}
-
-	public void setCreatedOn(Date createdOn) {
-		this.createdOn = createdOn;
-	}
-
-	public Date getLastModifiedTime() {
-		return lastModifiedTime;
-	}
-
-	public void setLastModifiedTime(Date lastModifiedTime) {
-		this.lastModifiedTime = lastModifiedTime;
 	}
 
 	public int getStatus() {
