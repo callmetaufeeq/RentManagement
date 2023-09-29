@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tw.download.RentExcelExporter;
-import com.tw.model.Rent;
+import com.tw.dto.RentListDto;
 import com.tw.service.RentService;
 
 import jakarta.servlet.http.HttpServletResponse;
@@ -34,7 +34,7 @@ public class ExcelController {
         String headerValue = "attachment; filename=Rent" + currentDateTime + ".xlsx";
         response.setHeader(headerKey, headerValue);
 
-        List <Rent> listRent = (List<Rent>) rentService.getRent();
+        List <RentListDto> listRent = (List<RentListDto>) rentService.getRent();
         RentExcelExporter generator = new RentExcelExporter(listRent);
         generator.generateExcelFile(response);
     }

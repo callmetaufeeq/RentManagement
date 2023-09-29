@@ -1,32 +1,45 @@
 package com.tw.model;
 
 import java.sql.Date;
+import java.util.List;
 
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 import org.hibernate.annotations.Where;
 import org.springframework.data.annotation.LastModifiedDate;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tw.generics.AbstractPersistable;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-
-@Entity
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity	
 @Table(name = "rent")
-//@Where(clause = "status = 1")
 @Where(clause = "deleted=false")
-public class Rent extends AbstractPersistable{
+public class Rent extends AbstractPersistable {
 	/**
-	 * 
+	 * SHAIKH SOHEL
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@ManyToOne
-	private ShopOwner shopOwner;
-
-	@Column(name = "amount")
-	private double amount;
+	
+	@Column(name = "rent_amount")
+	private double rentAmount;
+	
+	@Column(name = "deposit_amount")
+	private double depositAmount;
 
 	@Column(name = "paid")
 	private double paid;
@@ -35,91 +48,32 @@ public class Rent extends AbstractPersistable{
 	private double remaining;
 
 	@LastModifiedDate
-	@Column(name = "date")
-	private Date date;
-
-	@ManyToOne
-	private User user;
-
-	@Column(name = "payment_type")
-	private String paymentType;
-
-	public String getPaymentType() {
-		return paymentType;
-	}
-
-	public void setPaymentType(String paymentType) {
-		this.paymentType = paymentType;
-	}
+	@Column(name = "receipt_date")
+	private Date receiptDate;
 
 	@Column(name = "status")
-	private int status;
+	private String status;
 
+	@Column(name = "receipt_no")
+	private String receiptNo;
+	
 	@Column(name = "year")
 	private String year;
+	
+	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
+	@JoinColumn(name = "user_id")
+	@JsonIgnore
+	@NotFound(action = NotFoundAction.IGNORE)
+	private User user;
 
-	public String getYear() {
-		return year;
-	}
+	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
+	@JoinColumn(name = "shopowner_id")
+	@JsonIgnore
+	@NotFound(action = NotFoundAction.IGNORE)
+	private ShopOwner shopowner;
 
-	public void setYear(String year) {
-		this.year = year;
-	}
-
-	public ShopOwner getShopOwner() {
-		return shopOwner;
-	}
-
-	public void setShopOwner(ShopOwner shopOwner) {
-		this.shopOwner = shopOwner;
-	}
-
-	public double getAmount() {
-		return amount;
-	}
-
-	public void setAmount(double amount) {
-		this.amount = amount;
-	}
-
-	public double getPaid() {
-		return paid;
-	}
-
-	public void setPaid(double paid) {
-		this.paid = paid;
-	}
-
-	public double getRemaining() {
-		return remaining;
-	}
-
-	public void setRemaining(double remaining) {
-		this.remaining = remaining;
-	}
-
-	public Date getDate() {
-		return date;
-	}
-
-	public void setDate(Date date) {
-		this.date = date;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public int getStatus() {
-		return status;
-	}
-
-	public void setStatus(int status) {
-		this.status = status;
-	}
-
+	@OneToMany(mappedBy = "rent", fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
+	@JsonIgnore
+	private List<RentSlave> rentSlave;
+	
 }

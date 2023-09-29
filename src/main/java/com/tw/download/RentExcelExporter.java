@@ -2,8 +2,7 @@ package com.tw.download;
 
 import java.io.IOException;
 import java.util.List;
- 
- 
+
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.IndexedColors;
@@ -12,8 +11,7 @@ import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import com.tw.model.Rent;
-
+import com.tw.dto.RentListDto;
 import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -21,10 +19,10 @@ public class RentExcelExporter {
 	
 	private XSSFWorkbook workbook;
     private XSSFSheet sheet;
-    private List<Rent> listRent;
+    private List<RentListDto> listRent;
      
 
-    public RentExcelExporter(List<Rent>  listRent) {
+    public RentExcelExporter(List<RentListDto>  listRent) {
         this.listRent = listRent;
         workbook = new XSSFWorkbook();
     }
@@ -65,13 +63,13 @@ public class RentExcelExporter {
         XSSFFont font = workbook.createFont();
         font.setFontHeight(14);
         style.setFont(font);
-        for (Rent record: listRent) {
+        for (RentListDto record: listRent) {
             Row row = sheet.createRow(rowCount++);
             int columnCount = 0;
             createCell(row, columnCount++, record.getId(), style);
-            createCell(row, columnCount++, record.getShopOwner().getOwnerName(), style);
+            createCell(row, columnCount++, record.getShopownerName(), style);
             createCell(row, columnCount++, Double.toString(record.getPaid()), style);
-            createCell(row, columnCount++, Double.toString(record.getAmount()), style);
+            createCell(row, columnCount++, Double.toString(record.getRentAmount()), style);
         }
     }
     public void generateExcelFile(HttpServletResponse response) throws IOException {

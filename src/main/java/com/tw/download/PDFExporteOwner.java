@@ -50,7 +50,7 @@ public class PDFExporteOwner {
 	private void writeTableData(PdfPTable table) {
 		for (Shop s : listShop) {
 			table.addCell(String.valueOf(s.getId()));
-			table.addCell(s.getshopName());
+			table.addCell(s.getShopName());
 			table.addCell(s.getRentType());
 			if (s.getRented() == 1) {
 				table.addCell("Rented");

@@ -9,8 +9,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tw.model.Rent;
+import com.tw.dto.RentDto;
 import com.tw.service.RentService;
+import com.tw.spec.RentSpecDto;
 
 import jakarta.websocket.server.PathParam;
 
@@ -23,11 +24,17 @@ public class RentController {
 	private RentService rentService;
 
 	@PostMapping("/save")
-	public ResponseEntity<?>  saveUser(@RequestBody Rent rent) {
+	public ResponseEntity<?> saveUser(@RequestBody RentDto rent) {
 		return rentService.saveRent(rent);
 	}
 
-	@GetMapping("/listrent")
+	@PostMapping("/list")
+	public ResponseEntity<?> findAllRent(@RequestBody RentSpecDto dto) {
+		return rentService.findAllRent(dto);
+
+	}
+
+	@GetMapping("/findAll")
 	public ResponseEntity<?> getRent() {
 		return rentService.getRent();
 
@@ -65,21 +72,27 @@ public class RentController {
 	public ResponseEntity<?> remainingAmount() {
 		return rentService.remainingAmount();
 	}
-	
+
 	@GetMapping("/shopOwnerById")
-	public ResponseEntity<?> findByShopOwnerId(@PathParam("id") Long id){
+	public ResponseEntity<?> findByShopOwnerId(@PathParam("id") Long id) {
 		return rentService.findByShopOwnerId(id);
-		
+
 	}
+
 	@GetMapping("/sumOfRent")
-	public ResponseEntity<?> findSum(@PathParam("id") Long id, @PathParam("year") String year){
+	public ResponseEntity<?> findSum(@PathParam("id") Long id, @PathParam("year") String year) {
 		return rentService.findSum(id, year);
-		
+
 	}
-	
+
 	@GetMapping("/year")
-	public ResponseEntity<?> findByYear(@PathParam("year") String year){
+	public ResponseEntity<?> findByYear(@PathParam("year") String year) {
 		return rentService.findByYear(year);
+	}
+
+	@GetMapping("/shopowneryear")
+	public ResponseEntity<?> findByShopOwnerIdAndYear(@PathParam("id") Long id, @PathParam("year") String year) {
+		return rentService.findByShopOwnerIdAndYear(id, year);
 	}
 
 }

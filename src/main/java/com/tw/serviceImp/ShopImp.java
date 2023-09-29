@@ -69,15 +69,8 @@ public class ShopImp implements ShopService {
 
 	@Override
 	public List<Shop> categoryId(Long id) {
-		
-	/*	if (id != null) {
-			Shop byId = shopRepository.getById(id);
-			return (List<Shop>) byId;
-		}else {
-			*/
-		
 			return shopRepository.findByCategoryId(id);
-	//}
+
 	}
 
 	@Override

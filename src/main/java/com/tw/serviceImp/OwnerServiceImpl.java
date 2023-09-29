@@ -1,5 +1,6 @@
 package com.tw.serviceImp;
 
+import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,7 +28,13 @@ public class OwnerServiceImpl implements OwnerServices {
 	public String saveUser(ShopTenant shopdto) {
 		String ret = "";
 		ShopOwner obj=new ShopOwner();
-		obj.setId(shopdto.getId());
+		if(shopdto.getId()!=null && shopdto.getId()>0) {
+			obj =ownerRepository.getById(shopdto.getId());
+			obj.setModified(Calendar.getInstance());
+		}else {
+			obj.setCreated(Calendar.getInstance());
+			obj.setModified(Calendar.getInstance());
+		}
 		obj.setAddress(shopdto.getAddress());
 		obj.setDate(shopdto.getDate());
 		obj.setForWork(shopdto.getForWork());

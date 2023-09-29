@@ -62,7 +62,7 @@ public class RentExternalRepoYear {
 		                "JOIN Shop ON shop_owner.id = Shop.id " +
 		                "WHERE Rent.year = :year " +
 		                "GROUP BY Rent.year , shop_owner.owner_name, Shop.shop_name");
-		query.setParameter("year", year);
+		 query.setParameter("year", year);
 
 		List<RentSummaryDTO> retList = new ArrayList<>();
 		

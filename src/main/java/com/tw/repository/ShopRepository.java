@@ -18,7 +18,6 @@ public interface ShopRepository extends JpaRepository<Shop, Long> {
 	@Query("SELECT COUNT(*) FROM Shop WHERE rented = 0")
 	public int leftedShop();
 	
-	//@Query("SELECT Shop (*) FROM ORDER BY shop_name DESC")
 	public List<Shop> findByCategoryId(Long id);
 
 	public List<Shop> findAllByOrderByIdDesc();
