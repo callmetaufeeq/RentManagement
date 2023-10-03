@@ -31,10 +31,12 @@ import com.tw.generics.Messages;
 import com.tw.generics.Response;
 import com.tw.model.Rent;
 import com.tw.model.RentSlave;
+import com.tw.model.Shop;
 import com.tw.model.ShopOwner;
 import com.tw.model.User;
 import com.tw.repository.OwnerRepository;
 import com.tw.repository.RentRepository;
+import com.tw.repository.ShopRepository;
 import com.tw.repository.UserRepository;
 import com.tw.service.RentService;
 import com.tw.spec.RentSpec;
@@ -60,6 +62,9 @@ public class RentServiceImp implements RentService {
 	
 	@Autowired
 	private UserRepository userrepo;
+	
+	@Autowired
+	private ShopRepository shopRepo;
 
 	@SuppressWarnings("deprecation")
 	@Override
@@ -102,6 +107,10 @@ public class RentServiceImp implements RentService {
 			for (RentSlaveDto s : r.getRentSlave()) {
 				RentSlave t = new RentSlave();
 				BeanUtils.copyProperties(s, t);
+				if(s.getShopId()!=null && s.getShopId()>0) {
+					Shop shop=shopRepo.getById(s.getShopId());
+					t.setShop(shop);
+				}
 				t.setCreated(Calendar.getInstance());
 				t.setModified(Calendar.getInstance());
 				t.setRent(obj);

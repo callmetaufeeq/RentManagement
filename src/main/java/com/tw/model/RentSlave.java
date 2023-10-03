@@ -25,7 +25,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "rent_slave")
 @Where(clause = "deleted=false")
 public class RentSlave extends AbstractPersistable {
-	
+
 	/**
 	 * 
 	 */
@@ -36,17 +36,21 @@ public class RentSlave extends AbstractPersistable {
 
 	@Column(name = "remaining")
 	private double remaining;
-	
+
 	@Column(name = "payment_type")
 	private String paymentType;
-	
+
 	@Column(name = "year")
 	private String year;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
 	@JoinColumn(name = "rent_id")
 	@JsonIgnore
 	@NotFound(action = NotFoundAction.IGNORE)
 	private Rent rent;
+
+	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
+	@JoinColumn(name = "shop_id")
+	private Shop shop;
 
 }

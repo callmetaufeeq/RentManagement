@@ -14,4 +14,5 @@ public class RentSlaveDto {
 	private double remaining;
 	private String paymentType;
 	private String year;
+	private Long shopId;
 }
