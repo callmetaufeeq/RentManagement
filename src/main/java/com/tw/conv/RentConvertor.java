@@ -17,7 +17,7 @@ public class RentConvertor implements Function<Rent,RentListDto> {
 		r.setReceiptNo(t.getReceiptNo());
 		r.setRemaining(t.getRemaining());
 		r.setRentAmount(t.getRentAmount());
-		r.setShopName(t.getShopowner().getShop().getShopName());
+		//r.setShopName(t.getShopowner().get);
 		r.setShopownerName(t.getShopowner().getOwnerName());
 		r.setStatus(t.getStatus());
 		return r;

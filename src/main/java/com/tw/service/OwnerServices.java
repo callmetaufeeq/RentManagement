@@ -2,12 +2,14 @@ package com.tw.service;
 
 import java.util.List;
 
-import com.tw.dto.ShopTenant;
+import org.springframework.http.ResponseEntity;
+
+import com.tw.dto.ShopOwnerDto;
 import com.tw.model.ShopOwner;
 
 public interface OwnerServices {
 
-	String saveUser(ShopTenant shopOwner);
+	String saveUser(ShopOwnerDto shopOwner);
 
 	List<ShopOwner> getShopOwner();
 
@@ -16,5 +18,7 @@ public interface OwnerServices {
 	String deleteOwner(Long id);
 	
 	String changeStatus(Long id);
+	
+	ResponseEntity<?> shopsByOwnerId(Long id);
 
 }

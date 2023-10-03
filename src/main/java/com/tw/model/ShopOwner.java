@@ -1,17 +1,17 @@
 package com.tw.model;
 
-import java.sql.Date;
+import java.util.List;
 
 import org.hibernate.annotations.Where;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tw.generics.AbstractPersistable;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -29,11 +29,6 @@ public class ShopOwner extends AbstractPersistable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private Long id;
-
 	@Column(name = "owner_name")
 	private String ownerName;
 
@@ -43,19 +38,8 @@ public class ShopOwner extends AbstractPersistable {
 	@Column(name = "address")
 	private String address;
 
-	@Column(name = "for_work")
-	private String forWork;
+	@OneToMany(mappedBy = "shopOwner", fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
+	@JsonIgnore
+	private List<ShopOwnerSlave> shopownerSlave;
 
-	@Column(name = "status")
-	private int status=1;
-
-	@Column(name = "date")
-	private Date date;
-
-	@OneToOne
-	private Shop shop;
-	
-	@Column(name = "year")
-	private Date year;
-	
 }

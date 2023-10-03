@@ -2,10 +2,13 @@ package com.tw.service;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
+
+import com.tw.dto.ShopDto;
 import com.tw.model.Shop;
 
 public interface ShopService {
-	String saveShop(Shop shop);
+	ResponseEntity<?> saveShop(ShopDto dto);
 
 	List<Shop> getShop();
 

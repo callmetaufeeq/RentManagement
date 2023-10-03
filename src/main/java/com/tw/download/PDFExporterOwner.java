@@ -54,14 +54,14 @@ public class PDFExporterOwner {
 	private void writeTableData(PdfPTable table) {
 		for (ShopOwner s : listowner) {
 			table.addCell(String.valueOf(s.getId()));
-			table.addCell(s.getShop().getShopName());
+			//table.addCell(s.getShop().getShopName());
 			table.addCell(s.getOwnerName());
 			table.addCell(s.getAddress());
-			if (s.getStatus() == 1) {
-				table.addCell("Active");
-			} else {
-				table.addCell("Not Active");
-			}
+//			if (s.getStatus() == 1) {
+//				table.addCell("Active");
+//			} else {
+//				table.addCell("Not Active");
+//			}
 			/*
 			 * if (s.getRentType() == "Y") { table.addCell("Yearly"); } else {
 			 * table.addCell("Monthly");

@@ -1,6 +1,7 @@
 package com.tw.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -19,30 +20,35 @@ import jakarta.websocket.server.PathParam;
 @RequestMapping("/category")
 @CrossOrigin
 public class CategoryController {
-	
+
 	@Autowired
 	private CategoryService categoryService;
-	
+
 	@PostMapping("/save")
 	public String category(@RequestBody Category category) {
 		String saveCategory = categoryService.saveCategory(category);
 		return saveCategory;
 	}
-	
+
 	@GetMapping("/changeStatus")
 	public String changeStatus(@PathParam("id") Long id) {
 		return categoryService.changeStatus(id);
 	}
-	
+
 	@GetMapping("/list")
-	public List<Category>getCategory() {
+	public List<Category> getCategory() {
 		return categoryService.getCategory();
 	}
-	
+
 	@GetMapping("/delete")
-	public String deleteById(@PathParam("id")Long id) {
-		
+	public String deleteById(@PathParam("id") Long id) {
+
 		return categoryService.categoryDelete(id);
 	}
-	
+
+	/*
+	 * @GetMapping("/categorywise") public List<Category>
+	 * findByCategoryId(@PathParam("id") Long id){ Category findByCategoryId =
+	 * categoryService.findByCategoryId(id); return }
+	 */
 }
