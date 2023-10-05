@@ -24,10 +24,12 @@ import lombok.NoArgsConstructor;
 @Table(name = "shop_owner")
 @Where(clause = "deleted=false")
 public class ShopOwner extends AbstractPersistable {
+
+
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -822321045852409422L;
 
 	@Column(name = "owner_name")
 	private String ownerName;
@@ -39,7 +41,7 @@ public class ShopOwner extends AbstractPersistable {
 	private String address;
 
 	@OneToMany(mappedBy = "shopOwner", fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
-	@JsonIgnore
+	//@JsonIgnore
 	private List<ShopOwnerSlave> shopownerSlave;
 
 }

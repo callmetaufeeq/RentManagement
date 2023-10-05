@@ -25,7 +25,7 @@ public class Category  extends AbstractPersistable{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 4294751319200495576L;
 
 	@Id
 	@Column(name = "id")

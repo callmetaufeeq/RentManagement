@@ -5,15 +5,17 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.tw.ShopOwnerSlaveRepository;
 import com.tw.dto.ShopOwnerDto;
 import com.tw.dto.ShopOwnerSlaveDto;
+import com.tw.generics.Code;
 import com.tw.generics.Messages;
+import com.tw.generics.Response;
 import com.tw.model.Shop;
 import com.tw.model.ShopOwner;
 import com.tw.model.ShopOwnerSlave;
@@ -85,8 +87,8 @@ public class OwnerServiceImpl implements OwnerServices {
 
 	@Override
 	public ShopOwner ownerById(Long id) {
-		Optional<ShopOwner> findById = ownerRepository.findById(id);
-		return findById.get();
+		ShopOwner obj =ownerRepository.getById(id);
+		 return obj;
 	}
 
 	@Override
@@ -106,8 +108,8 @@ public class OwnerServiceImpl implements OwnerServices {
 
 	@Override
 	public ResponseEntity<?> shopsByOwnerId(Long id) {
-		
-		return null;
+		Optional<ShopOwner> rent = ownerRepository.findById(id);
+		return Response.build(Code.OK, rent.get());
 	}
 
 }

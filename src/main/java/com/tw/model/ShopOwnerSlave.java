@@ -47,8 +47,10 @@ public class ShopOwnerSlave extends AbstractPersistable {
 	@Column(name = "year")
 	private Date year;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
 	@JoinColumn(name = "shop_id")
+	//@JsonIgnore
+	@NotFound(action = NotFoundAction.IGNORE)
 	private Shop shop;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
