@@ -10,11 +10,11 @@ import com.tw.model.Shop;
 public interface ShopService {
 	ResponseEntity<?> saveShop(ShopDto dto);
 
-	List<Shop> getShop();
+	ResponseEntity<?> getShop();
 
-	Shop getShopById(Long id);
+	ResponseEntity<?> getShopById(Long id);
 
-	String shopDelete(Long id);
+	ResponseEntity<?> shopDelete(Long id);
 
 	String changeStatus(Long id);
 

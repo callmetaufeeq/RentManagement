@@ -9,13 +9,13 @@ import com.tw.model.ShopOwner;
 
 public interface OwnerServices {
 
-	String saveUser(ShopOwnerDto shopOwner);
+	ResponseEntity<?> saveUser(ShopOwnerDto shopOwner);
 
-	List<ShopOwner> getShopOwner();
+	ResponseEntity<?> getShopOwner();
 
-	ShopOwner ownerById(Long id);
+	ResponseEntity<?> ownerById(Long id);
 
-	String deleteOwner(Long id);
+	ResponseEntity<?>  deleteOwner(Long id);
 	
 	String changeStatus(Long id);
 	

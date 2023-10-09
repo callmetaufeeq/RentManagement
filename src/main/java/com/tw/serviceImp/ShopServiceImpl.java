@@ -22,7 +22,7 @@ import com.tw.repository.ShopRepository;
 import com.tw.service.ShopService;
 
 @Service
-public class ShopImp implements ShopService {
+public class ShopServiceImpl implements ShopService {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -39,7 +39,7 @@ public class ShopImp implements ShopService {
 		if (dto.getId() != null && dto.getId() > 0) {
 			obj = shopRepository.getById(dto.getId());
 			obj.setModified(Calendar.getInstance());
-			msg = "Shop" + Messages.UPDATED_MSG;
+			msg = "Shop " + Messages.UPDATED_MSG;
 		} else {
 			msg = "Shop " + Messages.CREATED_MSG;
 			obj.setModified(Calendar.getInstance());
@@ -57,20 +57,40 @@ public class ShopImp implements ShopService {
 	}
 
 	@Override
-	public List<Shop> getShop() {
-		return shopRepository.findAllByOrderByIdDesc();
+	public ResponseEntity<?> getShop() {
+		logger.info("Showing list of shops");
+		List<Shop> shop=shopRepository.findAll();
+		return Response.build(Code.OK,shop);
 	}
 
 	@Override
-	public Shop getShopById(Long id) {
+	public ResponseEntity<?> getShopById(Long id) {
 		Optional<Shop> shop = shopRepository.findById(id);
-		return shop.get();
+		
+		if (shop.isPresent()) {
+			return Response.build(Code.OK, shop.get());
+		} else {
+			return Response.build(Code.OK, Messages.NOT_FOUND);
+		}
 	}
 
 	@Override
-	public String shopDelete(Long id) {
-		shopRepository.deleteById(id);
-		return "deleted";
+	public ResponseEntity<?> shopDelete(Long id) {
+		boolean ispresent=false;
+		if(id !=null) {
+			Optional<Shop> sh=shopRepository.findById(id);
+			if(sh.isPresent()) {
+				ispresent=true;
+				Shop shop=sh.get();
+				shop.setDeleted(true);
+				shopRepository.save(shop);
+			}
+		}
+		if (ispresent) {
+			return Response.build(Code.OK, Messages.DELETED);
+		} else {
+			return Response.build(Code.OK, Messages.NOT_FOUND);
+		}
 	}
 
 	@SuppressWarnings("deprecation")

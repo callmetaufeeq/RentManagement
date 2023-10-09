@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.http.ResponseEntity;
 
 import com.tw.model.Shop;
 
@@ -20,7 +21,7 @@ public interface ShopRepository extends JpaRepository<Shop, Long> {
 
 	public List<Shop> findByCategoryId(Long id);
 
-	public List<Shop> findAllByOrderByIdDesc();
+	public ResponseEntity<?> findAllByOrderByIdDesc();
 
 	@Query("SELECT u FROM Shop u WHERE u.rented = 0")
 	public List<Shop> getShopByRented();

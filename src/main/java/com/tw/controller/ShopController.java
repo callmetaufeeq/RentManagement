@@ -31,17 +31,17 @@ public class ShopController {
 	}
 
 	@GetMapping("/listshop")
-	public List<Shop> getShop() {
+	public ResponseEntity<?> getShop() {
 		return shopService.getShop();
 	}
 
 	@GetMapping("/shopById")
-	public Shop getShopById(@PathParam("id") Long id) {
+	public ResponseEntity<?> getShopById(@PathParam("id") Long id) {
 		return shopService.getShopById(id);
 	}
 
 	@GetMapping("/deletebyid")
-	public String deleteByID(@PathParam("id") Long id) {
+	public ResponseEntity<?> deleteByID(@PathParam("id") Long id) {
 		return shopService.shopDelete(id);
 	}
 

@@ -16,8 +16,8 @@ import com.tw.download.PDFExporterOwner;
 import com.tw.download.PDFExporterShop;
 import com.tw.model.Shop;
 import com.tw.model.ShopOwner;
-import com.tw.service.OwnerServices;
-import com.tw.service.ShopService;
+import com.tw.repository.OwnerRepository;
+import com.tw.repository.ShopRepository;
 
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -26,11 +26,11 @@ import jakarta.servlet.http.HttpServletResponse;
 public class PDFController {
 
 	@Autowired
-	private ShopService shopService;
-	
+	private ShopRepository shopRepo;
+
 	@Autowired
-	private OwnerServices ownerServices;
-	
+	private OwnerRepository ownerRepo;
+
 	@GetMapping("/shoplist")
 	public void exportToPDFShop(HttpServletResponse response) throws DocumentException, IOException {
 		response.setContentType("application/pdf");
@@ -42,12 +42,12 @@ public class PDFController {
 		String headerValue = "attachment; filename=shops_" + currentDateTime + ".pdf";
 		response.setHeader(headerKey, headerValue);
 
-		List<Shop> listShops = shopService.getShop();
+		List<Shop> listShops = shopRepo.findAll();
 
 		PDFExporterShop exporter = new PDFExporterShop(listShops);
 		exporter.export(response);
 	}
-	
+
 	@GetMapping("/ownerlist")
 	public void exportToPDFOwner(HttpServletResponse response) throws DocumentException, IOException {
 		response.setContentType("application/pdf");
@@ -59,7 +59,7 @@ public class PDFController {
 		String headerValue = "attachment; filename=owner_" + currentDateTime + ".pdf";
 		response.setHeader(headerKey, headerValue);
 
-		List<ShopOwner> owner = ownerServices.getShopOwner();
+		List<ShopOwner> owner = ownerRepo.findAll();
 
 		PDFExporterOwner exporter = new PDFExporterOwner(owner);
 		exporter.export(response);

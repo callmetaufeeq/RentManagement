@@ -25,36 +25,32 @@ public class OwnerController {
 	private OwnerServices ownerServices;
 
 	@PostMapping("/save")
-	public String owners(@RequestBody ShopOwnerDto shopOwner) {
-		String saveUser = ownerServices.saveUser(shopOwner);
-		return saveUser;
+	public ResponseEntity<?> owners(@RequestBody ShopOwnerDto shopOwner) {
+		return ownerServices.saveUser(shopOwner);
 	}
 
 	@GetMapping("/list")
-	public List<ShopOwner> getShopOwner() {
+	public ResponseEntity<?> getShopOwner() {
 		return ownerServices.getShopOwner();
 	}
 
 	@GetMapping("/byId")
-	public ShopOwner ownerById(@PathParam("id") Long id) {
-		ShopOwner ownerById = ownerServices.ownerById(id);
-		return ownerById;
+	public ResponseEntity<?> ownerById(@PathParam("id") Long id) {
+		return ownerServices.getShopOwner();
 	}
 
 	@GetMapping("/delete")
-	public String deleteOwner(@PathParam("id") Long id) {
-		String deleteOwner = ownerServices.deleteOwner(id);
-		return deleteOwner;
+	public ResponseEntity<?> deleteOwner(@PathParam("id") Long id) {
+		return ownerServices.deleteOwner(id);
 	}
 
 	@GetMapping("/status")
 	public String checkStatus(@PathParam("id") Long id) {
 		return ownerServices.changeStatus(id);
 	}
-    
+
 	@GetMapping("/shopsByOwnerId")
-	public ResponseEntity<?> shopByOwnerId(@PathParam("id") Long id){
+	public ResponseEntity<?> shopByOwnerId(@PathParam("id") Long id) {
 		return ownerServices.shopsByOwnerId(id);
-		
 	}
 }

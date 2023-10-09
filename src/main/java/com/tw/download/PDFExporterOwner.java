@@ -14,7 +14,6 @@ import com.lowagie.text.Phrase;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
-import com.tw.model.Shop;
 import com.tw.model.ShopOwner;
 
 import jakarta.servlet.http.HttpServletResponse;
