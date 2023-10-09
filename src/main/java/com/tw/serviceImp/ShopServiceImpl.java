@@ -26,6 +26,7 @@ public class ShopServiceImpl implements ShopService {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
+	
 	@Autowired
 	private ShopRepository shopRepository;
 
