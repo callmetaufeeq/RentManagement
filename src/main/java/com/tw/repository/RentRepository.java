@@ -10,13 +10,13 @@ import com.tw.model.Rent;
 
 public interface RentRepository extends JpaRepository<Rent, Long>, JpaSpecificationExecutor<Rent> {
 
-	@Query(value = " SELECT sum(rentAmount) FROM Rent")
+	@Query(value = " SELECT sum(totalRentAmount) FROM Rent")
 	public Long totalAmount();
 
-	@Query(value = " SELECT sum(paid) FROM Rent")
+	@Query(value = " SELECT sum(totalPaid) FROM Rent")
 	public Long paidAmount();
 
-	@Query(value = " SELECT sum(remaining) FROM Rent")
+	@Query(value = " SELECT sum(totalRemaining) FROM Rent")
 	public Long remainingAmount();
 
 	public List<Rent> findByShopownerId(Long id);

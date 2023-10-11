@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 public class RentSlaveDto {
 
 	private Long id;
+	private double rentAmount;
+	private double depositAmount;
 	private double paid;
 	private double remaining;
 	private String paymentType;

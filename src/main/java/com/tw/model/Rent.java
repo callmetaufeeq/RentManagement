@@ -35,19 +35,18 @@ public class Rent extends AbstractPersistable {
 	private static final long serialVersionUID = 1L;
 
 	
-	@Column(name = "rent_amount")
-	private double rentAmount;
+	@Column(name = "total_rent_amount")
+	private double totalRentAmount;
 	
-	@Column(name = "deposit_amount")
-	private double depositAmount;
+	@Column(name = "total_deposit_amount")
+	private double totalDepositAmount;
 
-	@Column(name = "paid")
-	private double paid;
+	@Column(name = "total_paid")
+	private double totalPaid;
 
-	@Column(name = "remaining")
-	private double remaining;
+	@Column(name = "total_remaining")
+	private double totalRemaining;
 
-	@LastModifiedDate
 	@Column(name = "receipt_date")
 	private Date receiptDate;
 

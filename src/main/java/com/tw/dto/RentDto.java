@@ -13,10 +13,10 @@ import lombok.NoArgsConstructor;
 public class RentDto {
 
 	private Long id;
-	private double rentAmount;
-	private double depositAmount;
-	private double paid;
-	private double remaining;
+	private double totalRentAmount;
+	private double totalDepositAmount;
+	private double totalPaid;
+	private double totalRemaining;
 	private Date receiptDate;
 	private String status;
 	private String receiptNo;

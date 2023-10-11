@@ -82,14 +82,14 @@ public class RentServiceImp implements RentService {
 			obj.setId(r.getId());
 		}
 		obj.setReceiptDate(r.getReceiptDate());
-		obj.setPaid(r.getPaid());
+		obj.setTotalPaid(r.getTotalPaid());
 		obj.setReceiptNo(r.getReceiptNo());
-		obj.setRemaining(r.getRemaining());
-		obj.setRentAmount(r.getRentAmount());
-		obj.setDepositAmount(r.getDepositAmount());
+		obj.setTotalRemaining(r.getTotalRemaining());
+		obj.setTotalRentAmount(r.getTotalRentAmount());
+		obj.setTotalDepositAmount(r.getTotalRentAmount());
 		obj.setYear(r.getYear());
 		
-		if(r.getRemaining()>0) {
+		if(r.getTotalRemaining()>0) {
 			obj.setStatus("Pending");
 		}else {
 			obj.setStatus("Nill");

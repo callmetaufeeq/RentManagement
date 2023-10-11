@@ -31,6 +31,12 @@ public class RentSlave extends AbstractPersistable {
 	 */
 	private static final long serialVersionUID = 7672539885378528698L;
 
+	@Column(name = "rent_amount")
+	private double rentAmount;
+	
+	@Column(name = "deposit_amount")
+	private double depositAmount;
+	
 	@Column(name = "paid")
 	private double paid;
 
