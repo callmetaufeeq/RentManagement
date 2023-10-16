@@ -36,6 +36,7 @@ import com.tw.model.ShopOwner;
 import com.tw.model.User;
 import com.tw.repository.OwnerRepository;
 import com.tw.repository.RentRepository;
+import com.tw.repository.RentSlaveRepository;
 import com.tw.repository.ShopRepository;
 import com.tw.repository.UserRepository;
 import com.tw.service.RentService;
@@ -47,6 +48,9 @@ public class RentServiceImp implements RentService {
 
 	@Autowired
 	private RentRepository rentRepository;
+	
+	@Autowired
+	private RentSlaveRepository rentSlaveRepository;
 
 	@Autowired
 	RentExternalRepo rentExternalRepo;
@@ -234,5 +238,14 @@ public class RentServiceImp implements RentService {
 		List<RentListDto> listDto= r.stream().map(new RentConvertor()).collect(Collectors.toList());
 		return Response.build(Code.OK, listDto);
 	}
+
+	
+	/*
+	 * @Override public ResponseEntity<?> getTotalAmount(Long shopid, String year,
+	 * String type) {
+	 * 
+	 * RentSlave r = rentSlaveRepository.getTotalAmount(shopid, year, type); return
+	 * null; }
+	 */
 
 }

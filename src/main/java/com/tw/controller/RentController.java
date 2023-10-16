@@ -80,9 +80,11 @@ public class RentController {
 	}
 
 	@GetMapping("/sumOfRent")
-	public ResponseEntity<?> findSum(@PathParam("id") Long id, @PathParam("year") String year) {
-		return rentService.findSum(id, year);
-
+	public ResponseEntity<?> getTotalAmount(@PathParam("shopid") Long shopid, @PathParam("year") String year,
+			@PathParam("type") String type) {
+				return null;
+		//return rentService.findSum(shopid, year, type);
+		//return rentService.getTotalAmount(shopid, year, type);
 	}
 
 	@GetMapping("/year")

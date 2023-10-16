@@ -11,12 +11,12 @@ public class RentConvertor implements Function<Rent,RentListDto> {
 	public RentListDto apply(Rent t) {
 		RentListDto r =new RentListDto();
 		r.setId(t.getId());
-		r.setDepositAmount(t.getDepositAmount());
-		r.setPaid(t.getPaid());
+		r.setDepositAmount(t.getTotalDepositAmount());
+		r.setPaid(t.getTotalPaid());
 		r.setReceiptDate(t.getReceiptDate());
 		r.setReceiptNo(t.getReceiptNo());
-		r.setRemaining(t.getRemaining());
-		r.setRentAmount(t.getRentAmount());
+		r.setRemaining(t.getTotalRemaining());
+		r.setRentAmount(t.getTotalRentAmount());
 		//r.setShopName(t.getShopowner().get);
 		r.setShopownerName(t.getShopowner().getOwnerName());
 		r.setStatus(t.getStatus());

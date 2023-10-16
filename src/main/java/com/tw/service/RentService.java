@@ -35,4 +35,6 @@ public interface RentService {
 	ResponseEntity<?> findAllRent(RentSpecDto dto);
 
 	ResponseEntity<?> getRent();
+
+	//ResponseEntity<?> getTotalAmount(Long shopid, String year, String type);
 }
