@@ -10,7 +10,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name="reciept_number")
-public class RecieptNumber {
+public class DictionaryCount {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

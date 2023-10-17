@@ -1,5 +1,6 @@
 package com.tw.service;
 
-public interface RecieptService {
+public interface DictionaryService {
+	
 	String recieptNo();
 }

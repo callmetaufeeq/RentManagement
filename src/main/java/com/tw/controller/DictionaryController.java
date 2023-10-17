@@ -5,18 +5,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tw.service.RecieptService;
+import com.tw.service.DictionaryService;
 
 @RestController
 @RequestMapping("/number")
-public class RecieptController {
+public class DictionaryController {
 
 	@Autowired
-	private RecieptService recieptService;
+	private DictionaryService dictionaryService;
 
 	@GetMapping("/recieptNumber")
 	public String recieptNo() {
-		return recieptService.recieptNo();
+		return dictionaryService.recieptNo();
 	}
 
 }
