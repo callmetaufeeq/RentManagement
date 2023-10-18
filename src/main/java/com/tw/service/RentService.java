@@ -33,6 +33,8 @@ public interface RentService {
 	public ResponseEntity<?> findByShopOwnerIdAndYear(Long id, String year);
 
 	ResponseEntity<?> findAllRent(RentSpecDto dto);
+	 
+	ResponseEntity<?> findAllRentNew(RentSpecDto dto);
 
 	ResponseEntity<?> getRent();
 

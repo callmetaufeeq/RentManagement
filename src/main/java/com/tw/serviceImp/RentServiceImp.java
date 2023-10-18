@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -36,12 +37,12 @@ import com.tw.model.ShopOwner;
 import com.tw.model.User;
 import com.tw.repository.OwnerRepository;
 import com.tw.repository.RentRepository;
-import com.tw.repository.RentSlaveRepository;
 import com.tw.repository.ShopRepository;
 import com.tw.repository.UserRepository;
 import com.tw.service.RentService;
 import com.tw.spec.RentSpec;
 import com.tw.spec.RentSpecDto;
+import com.tw.spec.RentSpecification;
 
 @Service
 public class RentServiceImp implements RentService {
@@ -49,9 +50,6 @@ public class RentServiceImp implements RentService {
 	@Autowired
 	private RentRepository rentRepository;
 	
-	@Autowired
-	private RentSlaveRepository rentSlaveRepository;
-
 	@Autowired
 	RentExternalRepo rentExternalRepo;
 
@@ -239,13 +237,19 @@ public class RentServiceImp implements RentService {
 		return Response.build(Code.OK, listDto);
 	}
 
-	
-	/*
-	 * @Override public ResponseEntity<?> getTotalAmount(Long shopid, String year,
-	 * String type) {
-	 * 
-	 * RentSlave r = rentSlaveRepository.getTotalAmount(shopid, year, type); return
-	 * null; }
-	 */
+	@Override
+	public ResponseEntity<?> findAllRentNew(RentSpecDto dto) {
+
+		PageRequest pg = PageRequest.of(dto.getPage() - 1, dto.getSize(), Direction.DESC, AppConstants.MODIFIED);
+
+		Specification<Rent> spec = RentSpecification.buildSpecification(dto);
+
+		Page<Rent> r = rentRepository.findAll(spec, pg);
+
+		List<RentListDto> listDto = r.stream().map(new RentConvertor()).collect(Collectors.toList());
+		PageDto pageDto = new PageDto(listDto, r.getTotalElements());
+
+		return Response.build(Code.OK, pageDto);
+	}
 
 }

@@ -28,9 +28,15 @@ public class RentController {
 		return rentService.saveRent(rent);
 	}
 
-	@PostMapping("/list")
+	@PostMapping("/oldlist")
 	public ResponseEntity<?> findAllRent(@RequestBody RentSpecDto dto) {
 		return rentService.findAllRent(dto);
+
+	}
+	
+	@PostMapping("/list")
+	public ResponseEntity<?> findAllRentNew(@RequestBody RentSpecDto dto) {
+		return rentService.findAllRentNew(dto);
 
 	}
 
