@@ -17,6 +17,7 @@ import com.itextpdf.text.Font;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.Rectangle;
+import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -58,9 +59,11 @@ public class ReceiptGenerationServiceImpl implements ReceiptService {
 		HeaderTable1.setWidthPercentage(95f);
 		HeaderTable1.setHorizontalAlignment(Element.ALIGN_CENTER);
 
+		BaseFont urduFont = BaseFont.createFont("/fonts/urdu_font.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+		Font urduHeadingFont = new Font(urduFont, 12, Font.NORMAL);
+		urduHeadingFont.setColor(10, 4, 2); // Set the color (RGB values)
 
-
-		String directorBusiness = "Muslim Intezamiyah committee";
+		String urduDirectorBusiness = "مسلم انتظامیہ کمیٹی";
 		String dictoraddress = "Jama Masjid, Momin Pura chowk,  ";
 		String city = "Himayatnagar, Dist Nanded";
 		String Zipcode = "431802.";
@@ -70,7 +73,7 @@ public class ReceiptGenerationServiceImpl implements ReceiptService {
 
 		Phrase p2 = new Phrase();
 		p2.setFont(bold);
-		p2.add(new Chunk(" \n" + directorBusiness));
+		p2.add(new Chunk(" \n" + urduDirectorBusiness,urduHeadingFont));
 		p2.setFont(regular);
 		p2.add(new Chunk(" \n" + dictoraddress));
 		p2.add(new Chunk(" \n" + city + " " + Zipcode));

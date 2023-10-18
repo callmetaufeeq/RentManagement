@@ -1,6 +1,9 @@
 package com.tw.dto;
 
 import java.sql.Date;
+import java.util.List;
+
+import com.tw.model.RentSlave;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,6 +23,7 @@ public class RentListDto {
 	private String status;
 	private String receiptNo;
 	private String shopownerName;
-	private String shopName;
+	//private String shopName;
+	private List<RentSlaveDto> rentSlave;
 
 }
