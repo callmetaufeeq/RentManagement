@@ -19,6 +19,7 @@ public class ShopDto {
 	private String address;
 	private Date joinDate;
 	private String rentType;
+	private String depositAmount;
 	private int status = 1;
 	private int rented = 0;
 	private String shopCode;

@@ -20,6 +20,7 @@ import com.tw.conv.RentConvertor;
 import com.tw.customRepo.RentExternalRepo;
 import com.tw.customRepo.RentExternalRepoYear;
 import com.tw.customRepo.RentExternalYearOwner;
+import com.tw.dto.HistoryRentDto;
 import com.tw.dto.PageDto;
 import com.tw.dto.RentDto;
 import com.tw.dto.RentListDto;
@@ -37,6 +38,7 @@ import com.tw.model.ShopOwner;
 import com.tw.model.User;
 import com.tw.repository.OwnerRepository;
 import com.tw.repository.RentRepository;
+import com.tw.repository.RentSlaveRepository;
 import com.tw.repository.ShopRepository;
 import com.tw.repository.UserRepository;
 import com.tw.service.RentService;
@@ -49,36 +51,39 @@ public class RentServiceImp implements RentService {
 
 	@Autowired
 	private RentRepository rentRepository;
-	
+
 	@Autowired
 	RentExternalRepo rentExternalRepo;
 
 	@Autowired
 	RentExternalRepoYear RentExternalRepoYear;
-	
+
 	@Autowired
 	RentExternalYearOwner rentExternalYearOwner;
-	
+
 	@Autowired
 	private OwnerRepository shopownerRepo;
-	
+
 	@Autowired
 	private UserRepository userrepo;
-	
+
 	@Autowired
 	private ShopRepository shopRepo;
+
+	@Autowired
+	private RentSlaveRepository rentSlaveRepo;
 
 	@SuppressWarnings("deprecation")
 	@Override
 	public ResponseEntity<?> saveRent(RentDto r) {
-		String msg="";
-		Rent obj=new Rent();
-		if(r.getId()!=null && r.getId()>0) {
-			obj=rentRepository.getById(r.getId());
+		String msg = "";
+		Rent obj = new Rent();
+		if (r.getId() != null && r.getId() > 0) {
+			obj = rentRepository.getById(r.getId());
 			obj.setModified(Calendar.getInstance());
-			msg = "Rent " +Messages.UPDATED_MSG;
-		}else {
-			msg ="Rent " +Messages.CREATED_MSG;
+			msg = "Rent " + Messages.UPDATED_MSG;
+		} else {
+			msg = "Rent " + Messages.CREATED_MSG;
 			obj.setModified(Calendar.getInstance());
 			obj.setCreated(Calendar.getInstance());
 			obj.setId(r.getId());
@@ -90,18 +95,18 @@ public class RentServiceImp implements RentService {
 		obj.setTotalRentAmount(r.getTotalRentAmount());
 		obj.setTotalDepositAmount(r.getTotalRentAmount());
 		obj.setYear(r.getYear());
-		
-		if(r.getTotalRemaining()>0) {
+
+		if (r.getTotalRemaining() > 0) {
 			obj.setStatus("Pending");
-		}else {
+		} else {
 			obj.setStatus("Nill");
 		}
-		if(r.getShopownerId()!=null && r.getShopownerId()>0) {
-			ShopOwner sw=shopownerRepo.getById(r.getShopownerId());
+		if (r.getShopownerId() != null && r.getShopownerId() > 0) {
+			ShopOwner sw = shopownerRepo.getById(r.getShopownerId());
 			obj.setShopowner(sw);
 		}
-		if(r.getUserId()!=null && r.getUserId()>0) {
-			User u=userrepo.getById(r.getUserId());
+		if (r.getUserId() != null && r.getUserId() > 0) {
+			User u = userrepo.getById(r.getUserId());
 			obj.setUser(u);
 		}
 		if (r.getRentSlave() != null) {
@@ -109,8 +114,8 @@ public class RentServiceImp implements RentService {
 			for (RentSlaveDto s : r.getRentSlave()) {
 				RentSlave t = new RentSlave();
 				BeanUtils.copyProperties(s, t);
-				if(s.getShopId()!=null && s.getShopId()>0) {
-					Shop shop=shopRepo.getById(s.getShopId());
+				if (s.getShopId() != null && s.getShopId() > 0) {
+					Shop shop = shopRepo.getById(s.getShopId());
 					t.setShop(shop);
 				}
 				t.setCreated(Calendar.getInstance());
@@ -223,17 +228,17 @@ public class RentServiceImp implements RentService {
 	@Override
 	public ResponseEntity<?> findAllRent(RentSpecDto dto) {
 		PageRequest pg = PageRequest.of(dto.getPage() - 1, dto.getSize(), Direction.DESC, AppConstants.MODIFIED);
-		Page<Rent> r=rentRepository.findAll(new RentSpec(dto.getShopownerName(),dto.getShopName(),
-				dto.getStatus(),dto.getYear()),pg);
-		List<RentListDto> listDto= r.stream().map(new RentConvertor()).collect(Collectors.toList());
+		Page<Rent> r = rentRepository
+				.findAll(new RentSpec(dto.getShopownerName(), dto.getShopName(), dto.getStatus(), dto.getYear()), pg);
+		List<RentListDto> listDto = r.stream().map(new RentConvertor()).collect(Collectors.toList());
 		PageDto pageDto = new PageDto(listDto, r.getTotalElements());
 		return Response.build(Code.OK, pageDto);
 	}
 
 	@Override
 	public ResponseEntity<?> getRent() {
-		List<Rent> r=rentRepository.findAll();
-		List<RentListDto> listDto= r.stream().map(new RentConvertor()).collect(Collectors.toList());
+		List<Rent> r = rentRepository.findAll();
+		List<RentListDto> listDto = r.stream().map(new RentConvertor()).collect(Collectors.toList());
 		return Response.build(Code.OK, listDto);
 	}
 
@@ -250,6 +255,42 @@ public class RentServiceImp implements RentService {
 		PageDto pageDto = new PageDto(listDto, r.getTotalElements());
 
 		return Response.build(Code.OK, pageDto);
+	}
+
+	@Override
+	public ResponseEntity<HistoryRentDto> getAmt(Long shopId, String year, String paymentType) {
+
+		Double rentAmount = 0.0;
+		Double depositAmount = 0.0;
+		Double paidAmount = 0.0;
+		Double remainingAmount = 0.0;
+
+		paidAmount = rentSlaveRepo.getSumPaid(shopId, year, paymentType);
+		paidAmount = paidAmount != null ? paidAmount : 0.0;
+
+		if ("R".equals(paymentType)) {
+			rentAmount = rentSlaveRepo.getRentAmount(shopId, year, paymentType);
+			if (rentAmount == null || rentAmount == 0.0) {
+				Shop obj = shopRepo.getById(shopId);
+				rentAmount = obj.getRent();
+			}
+			remainingAmount = rentAmount - paidAmount;
+		} else {
+			depositAmount = rentSlaveRepo.getDepositAmount(shopId, year, paymentType);
+
+			if (depositAmount == null || depositAmount ==0.0) {
+				Shop obj = shopRepo.getById(shopId);
+				depositAmount = obj.getDepositAmount();
+			}
+			remainingAmount = depositAmount - paidAmount;
+		}
+		HistoryRentDto rentDto = new HistoryRentDto();
+		rentDto.setRentAmount(rentAmount);
+		rentDto.setDepositAmount(depositAmount);
+		rentDto.setPaidAmount(paidAmount);
+		rentDto.setRemainingAmount(remainingAmount);
+		return new ResponseEntity<>(rentDto, HttpStatus.OK);
+
 	}
 
 }

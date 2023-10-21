@@ -4,11 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tw.dto.HistoryRentDto;
 import com.tw.dto.RentDto;
 import com.tw.service.RentService;
 import com.tw.spec.RentSpecDto;
@@ -33,7 +35,7 @@ public class RentController {
 		return rentService.findAllRent(dto);
 
 	}
-	
+
 	@PostMapping("/list")
 	public ResponseEntity<?> findAllRentNew(@RequestBody RentSpecDto dto) {
 		return rentService.findAllRentNew(dto);
@@ -88,9 +90,9 @@ public class RentController {
 	@GetMapping("/sumOfRent")
 	public ResponseEntity<?> getTotalAmount(@PathParam("shopid") Long shopid, @PathParam("year") String year,
 			@PathParam("type") String type) {
-				return null;
-		//return rentService.findSum(shopid, year, type);
-		//return rentService.getTotalAmount(shopid, year, type);
+		return null;
+		// return rentService.findSum(shopid, year, type);
+		// return rentService.getTotalAmount(shopid, year, type);
 	}
 
 	@GetMapping("/year")
@@ -102,5 +104,8 @@ public class RentController {
 	public ResponseEntity<?> findByShopOwnerIdAndYear(@PathParam("id") Long id, @PathParam("year") String year) {
 		return rentService.findByShopOwnerIdAndYear(id, year);
 	}
-
+	@GetMapping("/getAmt")
+	public ResponseEntity<HistoryRentDto> yourMethodName(@PathParam("shopid") Long shopid , @PathParam("year") String year,@PathParam("paymentType") String paymentType ) {
+	    return rentService.getAmt(shopid, year, paymentType);
+	}
 }

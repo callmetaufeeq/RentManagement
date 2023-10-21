@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 
+import com.tw.dto.HistoryRentDto;
 import com.tw.dto.RentDto;
 import com.tw.dto.RentSummaryDTO;
 import com.tw.model.Rent;
@@ -37,6 +38,8 @@ public interface RentService {
 	ResponseEntity<?> findAllRentNew(RentSpecDto dto);
 
 	ResponseEntity<?> getRent();
+	
+	ResponseEntity<HistoryRentDto> getAmt(Long shopId,String year,String paymentType);
 
-	//ResponseEntity<?> getTotalAmount(Long shopid, String year, String type);
+
 }

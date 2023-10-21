@@ -19,7 +19,6 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -49,6 +48,9 @@ public class Shop extends AbstractPersistable {
 
 	@Column(name = "rent_type")
 	private String rentType;
+	
+	@Column(name = "deposit_amount")
+	private double depositAmount;
 
 	@Column(name = "status")
 	private int status = 1;
