@@ -23,5 +23,8 @@ public class RentDto {
 	private Long shopownerId;
 	private Long userId;
 	private String year;
+	private Long shopId;
+	private String paymentType;
 	private List<RentSlaveDto> rentSlave;
+
 }

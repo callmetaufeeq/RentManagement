@@ -21,7 +21,4 @@ public interface RentRepository extends JpaRepository<Rent, Long>, JpaSpecificat
 
 	public List<Rent> findByShopownerId(Long id);
 
-//	@Query("SELECT r FROM Rent r JOIN r.shopOwner s WHERE s.id = :shopOwnerId AND r.year = :year")
-//	List<Rent> findByShopOwnerIdAndYear(Long shopOwnerId, String year);
-
 }

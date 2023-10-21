@@ -16,7 +16,6 @@ public class RentSpecification {
             List<Predicate> predicates = new ArrayList<>();
 
             if (StringUtils.hasText(dto.getShopownerName())) {
-                //predicates.add(criteriaBuilder.equal(root.get("shopownerName"), dto.getShopownerName()));
             	predicates.add(criteriaBuilder.like(root.get("shopowner").get("ownerName"),
 						"%" + dto.getShopownerName() + "%"));
             }
@@ -34,7 +33,22 @@ public class RentSpecification {
             	predicates.add(criteriaBuilder.equal(root.get("rentSlave").get("year"),
 						 dto.getYear() ));
             }
-
+            
+            if (StringUtils.hasText(dto.getShopownerName())) {
+            	predicates.add(criteriaBuilder.like(root.get("shopowner").get("mobileNo"),
+						"%" + dto.getMobileNo() + "%"));
+            }
+            
+            if (StringUtils.hasText(dto.getShopownerName())) {
+            	predicates.add(criteriaBuilder.like(root.get("rent").get("receiptNo"),
+						"%" + dto.getReceiptNo() + "%"));
+            }
+            
+            if (StringUtils.hasText(dto.getShopownerName())) {
+            	predicates.add(criteriaBuilder.like(root.get("rent").get("receiptDate"),
+						"%" + dto.getReceiptDate() + "%"));
+            }
+            
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
         };
     }

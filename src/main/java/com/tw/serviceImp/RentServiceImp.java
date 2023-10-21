@@ -256,7 +256,6 @@ public class RentServiceImp implements RentService {
 
 		return Response.build(Code.OK, pageDto);
 	}
-
 	@Override
 	public ResponseEntity<HistoryRentDto> getAmt(Long shopId, String year, String paymentType) {
 

@@ -23,7 +23,6 @@ public class RentListDto {
 	private String status;
 	private String receiptNo;
 	private String shopownerName;
-	//private String shopName;
 	private List<RentSlaveDto> rentSlave;
 
 }
