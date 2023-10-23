@@ -15,10 +15,10 @@ public class DictionaryServiceImpl implements DictionaryService {
 
 	@Override
 	public String recieptNo() {
-		String type = "RcNo";
+		String type = "RCN";
 		DictionaryCount obj = dictionaryRepo.getByType(type);
 		int i = obj.getCount();
-		String s = "RcNo-" + i;
+		String s = "RCN-" + i;
 		return s;
 	}
 }

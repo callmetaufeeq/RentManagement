@@ -31,11 +31,13 @@ import com.tw.generics.AppConstants;
 import com.tw.generics.Code;
 import com.tw.generics.Messages;
 import com.tw.generics.Response;
+import com.tw.model.DictionaryCount;
 import com.tw.model.Rent;
 import com.tw.model.RentSlave;
 import com.tw.model.Shop;
 import com.tw.model.ShopOwner;
 import com.tw.model.User;
+import com.tw.repository.DictionaryRepository;
 import com.tw.repository.OwnerRepository;
 import com.tw.repository.RentRepository;
 import com.tw.repository.RentSlaveRepository;
@@ -45,6 +47,7 @@ import com.tw.service.RentService;
 import com.tw.spec.RentSpec;
 import com.tw.spec.RentSpecDto;
 import com.tw.spec.RentSpecification;
+import com.tw.utility.Constant;
 
 @Service
 public class RentServiceImp implements RentService {
@@ -72,6 +75,9 @@ public class RentServiceImp implements RentService {
 
 	@Autowired
 	private RentSlaveRepository rentSlaveRepo;
+
+	@Autowired
+	private DictionaryRepository dictionaryRepo;
 
 	@SuppressWarnings("deprecation")
 	@Override
@@ -125,7 +131,12 @@ public class RentServiceImp implements RentService {
 			}
 			obj.setRentSlave(rentSlavelist);
 		}
-		rentRepository.save(obj);
+		Rent rr = rentRepository.save(obj);
+		if (rr != null) {
+			DictionaryCount count = dictionaryRepo.getByType(Constant.RECEIPT_NO);
+			count.setCount(count.getCount() + 1);
+			dictionaryRepo.save(count);
+		}
 		return Response.build(Code.OK, msg);
 	}
 
@@ -256,28 +267,29 @@ public class RentServiceImp implements RentService {
 
 		return Response.build(Code.OK, pageDto);
 	}
+
 	@Override
-	public ResponseEntity<HistoryRentDto> getAmt(Long shopId, String year, String paymentType) {
+	public ResponseEntity<?> getAmt(Long shopId, String year, String rentType) {
 
 		Double rentAmount = 0.0;
 		Double depositAmount = 0.0;
 		Double paidAmount = 0.0;
 		Double remainingAmount = 0.0;
 
-		paidAmount = rentSlaveRepo.getSumPaid(shopId, year, paymentType);
+		paidAmount = rentSlaveRepo.getSumPaid(shopId, year, rentType);
 		paidAmount = paidAmount != null ? paidAmount : 0.0;
 
-		if ("R".equals(paymentType)) {
-			rentAmount = rentSlaveRepo.getRentAmount(shopId, year, paymentType);
+		if ("R".equals(rentType)) {
+			rentAmount = rentSlaveRepo.getRentAmount(shopId, year, rentType);
 			if (rentAmount == null || rentAmount == 0.0) {
 				Shop obj = shopRepo.getById(shopId);
 				rentAmount = obj.getRent();
 			}
 			remainingAmount = rentAmount - paidAmount;
 		} else {
-			depositAmount = rentSlaveRepo.getDepositAmount(shopId, year, paymentType);
+			depositAmount = rentSlaveRepo.getDepositAmount(shopId, year, rentType);
 
-			if (depositAmount == null || depositAmount ==0.0) {
+			if (depositAmount == null || depositAmount == 0.0) {
 				Shop obj = shopRepo.getById(shopId);
 				depositAmount = obj.getDepositAmount();
 			}
@@ -290,6 +302,14 @@ public class RentServiceImp implements RentService {
 		rentDto.setRemainingAmount(remainingAmount);
 		return new ResponseEntity<>(rentDto, HttpStatus.OK);
 
+	}
+
+	@Override
+	public ResponseEntity<?> report(RentSpecDto dto) {
+
+		Specification<Rent> spec = RentSpecification.buildSpecification(dto);
+
+		return Response.build(Code.OK, spec);
 	}
 
 }

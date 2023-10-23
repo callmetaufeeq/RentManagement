@@ -104,8 +104,15 @@ public class RentController {
 	public ResponseEntity<?> findByShopOwnerIdAndYear(@PathParam("id") Long id, @PathParam("year") String year) {
 		return rentService.findByShopOwnerIdAndYear(id, year);
 	}
+
 	@GetMapping("/getAmt")
-	public ResponseEntity<HistoryRentDto> yourMethodName(@PathParam("shopid") Long shopid , @PathParam("year") String year,@PathParam("paymentType") String paymentType ) {
-	    return rentService.getAmt(shopid, year, paymentType);
+	public ResponseEntity<?> yourMethodName(@PathParam("shopid") Long shopid, @PathParam("year") String year,
+			@PathParam("paymentType") String paymentType) {
+		return rentService.getAmt(shopid, year, paymentType);
+	}
+
+	@PostMapping("/report")
+	public ResponseEntity<?> report(@RequestBody RentSpecDto dto) {
+		return rentService.report(dto);
 	}
 }

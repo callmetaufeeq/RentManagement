@@ -31,7 +31,7 @@ public class RentConvertor implements Function<Rent,RentListDto> {
 			dto.setId(rentS.getId());
 			dto.setDepositAmount(rentS.getDepositAmount());
 			dto.setPaid(rentS.getPaid());
-			dto.setPaymentType(rentS.getPaymentType());
+			dto.setRentType(rentS.getRentType());
 			dto.setRemaining(rentS.getRemaining());
 			dto.setRentAmount(rentS.getRentAmount());
 			dto.setYear(rentS.getYear());

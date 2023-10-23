@@ -9,7 +9,7 @@ import jakarta.persistence.Table;
 import lombok.Data;
 @Data
 @Entity
-@Table(name="reciept_number")
+@Table(name="dictionary_count")
 public class DictionaryCount {
 	
 	@Id
@@ -18,7 +18,7 @@ public class DictionaryCount {
 	private Long id;
 	
 	@Column(name="count")
-	private int count=0;
+	private int count=1;
 	
 	@Column(name="type")
 	private String type;

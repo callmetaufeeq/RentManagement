@@ -14,7 +14,7 @@ public class DictionaryController {
 	@Autowired
 	private DictionaryService dictionaryService;
 
-	@GetMapping("/recieptNumber")
+	@GetMapping("dictionary_number")
 	public String recieptNo() {
 		return dictionaryService.recieptNo();
 	}

@@ -39,7 +39,9 @@ public interface RentService {
 
 	ResponseEntity<?> getRent();
 	
-	ResponseEntity<HistoryRentDto> getAmt(Long shopId,String year,String paymentType);
+	ResponseEntity<?> getAmt(Long shopId,String year,String rentType);
+	
+	ResponseEntity<?> report(RentSpecDto dto);
 
 
 }

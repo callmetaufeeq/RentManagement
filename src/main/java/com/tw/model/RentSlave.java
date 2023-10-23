@@ -43,8 +43,8 @@ public class RentSlave extends AbstractPersistable {
 	@Column(name = "remaining")
 	private double remaining;
 
-	@Column(name = "payment_type")
-	private String paymentType;
+	@Column(name = "rent_type")
+	private String rentType;
 
 	@Column(name = "year")
 	private String year;

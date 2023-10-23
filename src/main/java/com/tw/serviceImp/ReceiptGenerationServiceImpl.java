@@ -29,11 +29,9 @@ import com.tw.service.ReceiptService;
 @Service
 public class ReceiptGenerationServiceImpl implements ReceiptService {
 
-	// ...
-
 	@Autowired
 	private RentRepository rentRepo;
-	
+
 	@Override
 	public byte[] generatePdfReceipt(Long id) throws IOException, DocumentException {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -59,11 +57,11 @@ public class ReceiptGenerationServiceImpl implements ReceiptService {
 		HeaderTable1.setWidthPercentage(95f);
 		HeaderTable1.setHorizontalAlignment(Element.ALIGN_CENTER);
 
-		BaseFont urduFont = BaseFont.createFont("/fonts/urdu_font.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
-		Font urduHeadingFont = new Font(urduFont, 12, Font.NORMAL);
-		urduHeadingFont.setColor(10, 4, 2); // Set the color (RGB values)
+		//BaseFont urduFont = BaseFont.createFont( BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+		//Font urduHeadingFont = new Font(urduFont, 12, Font.NORMAL);
+		//urduHeadingFont.setColor(10, 4, 2); // Set the color (RGB values)
 
-		String urduDirectorBusiness = "مسلم انتظامیہ کمیٹی";
+		String Director = "MUSLIM INTEZAMIYAH COMMITTEE";
 		String dictoraddress = "Jama Masjid, Momin Pura chowk,  ";
 		String city = "Himayatnagar, Dist Nanded";
 		String Zipcode = "431802.";
@@ -73,7 +71,7 @@ public class ReceiptGenerationServiceImpl implements ReceiptService {
 
 		Phrase p2 = new Phrase();
 		p2.setFont(bold);
-		p2.add(new Chunk(" \n" + urduDirectorBusiness,urduHeadingFont));
+		p2.add(new Chunk(" \n" + Director));
 		p2.setFont(regular);
 		p2.add(new Chunk(" \n" + dictoraddress));
 		p2.add(new Chunk(" \n" + city + " " + Zipcode));
@@ -172,7 +170,7 @@ public class ReceiptGenerationServiceImpl implements ReceiptService {
 			RentSlave bs = r.getRentSlave().get(i);
 			double rentAmount = bs.getRentAmount();
 			String subName = bs.getShop().getShopName();
-			String rentType = bs.getPaymentType();
+			String rentType = bs.getRentType();
 			if (rentType.equals("R")) {
 				rentType = "Rent";
 			} else {
@@ -296,24 +294,17 @@ public class ReceiptGenerationServiceImpl implements ReceiptService {
 		int[] headerwidth6 = { 50, 50 };
 		HeaderTable6.setWidths(headerwidth6);
 		HeaderTable6.setWidthPercentage(95f);
-		// HeaderTable6.getDefaultCell().setBorder(Rectangle.OUT_TOP);
 
 		HeaderTable6.addCell(new Phrase("", subheader));
 		HeaderTable6.addCell(new Phrase("", tabletext));
 
 		HeaderTable6.addCell(new Phrase("Amount In Words :", subheader));
 
-		// HeaderTable6.addCell(new Phrase("" +
-		// (EnglishNumberToWords.convert(finalams)), tabletext));
-
 		document.add(HeaderTable6);
 		HeaderTable6.flushContent();
 
 		document.add(HeaderTable1);
 		HeaderTable1.flushContent();
-
-		// Add the table to the document
-		// document.add(table);
 
 		document.close();
 		return baos.toByteArray();
