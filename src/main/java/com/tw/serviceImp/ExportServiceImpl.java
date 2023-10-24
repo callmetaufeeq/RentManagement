@@ -3,6 +3,7 @@ package com.tw.serviceImp;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.sql.Date;
+import java.util.Calendar;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -36,7 +37,7 @@ public class ExportServiceImpl implements ExportService {
 		String path = " ";
 		String ownersName = "skk";
 		String receiptNo = rent.getReceiptNo();
-		Date receiptDate = rent.getReceiptDate();
+		Calendar receiptDate = rent.getReceiptDate();
 		double remaining = rent.getTotalRemaining();
 
 		String receipt = environment.getRequiredProperty("receipt.print");

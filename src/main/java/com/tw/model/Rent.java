@@ -1,6 +1,8 @@
 package com.tw.model;
 
-import java.sql.Date;
+
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.annotations.NotFound;
@@ -47,7 +49,7 @@ public class Rent extends AbstractPersistable {
 	private double totalRemaining;
 
 	@Column(name = "receipt_date")
-	private Date receiptDate;
+	private Calendar receiptDate;
 
 	@Column(name = "status")
 	private String status;

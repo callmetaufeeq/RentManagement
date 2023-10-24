@@ -24,6 +24,7 @@ import com.tw.dto.HistoryRentDto;
 import com.tw.dto.PageDto;
 import com.tw.dto.RentDto;
 import com.tw.dto.RentListDto;
+import com.tw.dto.RentReportDto;
 import com.tw.dto.RentSlaveDto;
 import com.tw.dto.RentSummaryDTO;
 import com.tw.dto.RentYearOwnerId;
@@ -34,6 +35,7 @@ import com.tw.generics.Response;
 import com.tw.model.DictionaryCount;
 import com.tw.model.Rent;
 import com.tw.model.RentSlave;
+import com.tw.model.ReportSpecification;
 import com.tw.model.Shop;
 import com.tw.model.ShopOwner;
 import com.tw.model.User;
@@ -305,11 +307,12 @@ public class RentServiceImp implements RentService {
 	}
 
 	@Override
-	public ResponseEntity<?> report(RentSpecDto dto) {
+	public ResponseEntity<?> report(RentReportDto dto) {
 
-		Specification<Rent> spec = RentSpecification.buildSpecification(dto);
-
-		return Response.build(Code.OK, spec);
+		Specification<Rent> spec = ReportSpecification.buildSpecification(dto);
+		List<Rent> r = rentRepository.findAll(spec);
+		List<RentListDto> listDto = r.stream().map(new RentConvertor()).collect(Collectors.toList());
+		return Response.build(Code.OK, listDto);
 	}
 
 }

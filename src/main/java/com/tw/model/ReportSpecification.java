@@ -1,19 +1,20 @@
-package com.tw.spec;
+package com.tw.model;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.jpa.domain.Specification;
 
-
-import com.tw.model.Rent;
+import com.tw.dto.RentReportDto;
 
 import jakarta.persistence.criteria.Predicate;
 
-public class RentSpecification {
+public class ReportSpecification {
 
-	public static Specification<Rent> buildSpecification(RentSpecDto dto) {
+	public static Specification<Rent> buildSpecification(RentReportDto dto) {
 		return (root, query, criteriaBuilder) -> {
 			List<Predicate> predicates = new ArrayList<>();
 
@@ -35,21 +36,42 @@ public class RentSpecification {
 				predicates.add(criteriaBuilder.equal(root.get("rentSlave").get("year"), dto.getYear()));
 			}
 
-			if (StringUtils.isNotEmpty(dto.getShopownerName())) {
+			if (StringUtils.isNotEmpty(dto.getMobileNo())) {
 				predicates.add(
 						criteriaBuilder.like(root.get("shopowner").get("mobileNo"), "%" + dto.getMobileNo() + "%"));
 			}
 
-			if (StringUtils.isNotEmpty(dto.getShopownerName())) {
+			if (StringUtils.isNotEmpty(dto.getReceiptNo())) {
 				predicates.add(criteriaBuilder.like(root.get("receiptNo"), "%" + dto.getReceiptNo() + "%"));
 			}
 
-			if (dto.getReceiptDate()!=null) {
-				predicates.add(
-						criteriaBuilder.like(root.get("receiptDate"), "%" + dto.getReceiptDate() + "%"));
+			if (dto.getReceiptDate() != null) {
+			    Calendar receiptDate = dto.getReceiptDate();
+
+			    // Convert Calendar to Date
+			    Date receiptDateAsDate = receiptDate.getTime();
+
+			    predicates.add(criteriaBuilder.equal(root.get("receiptDate"), receiptDateAsDate));
 			}
 
+			if (dto.getFromDate() != null && dto.getToDate() != null) {
+				
+				Calendar fromDate= dto.getFromDate() ;
+				fromDate.set(Calendar.HOUR_OF_DAY, 0);
+				fromDate.set(Calendar.MINUTE, 0);
+				fromDate.set(Calendar.SECOND, 0);
+				fromDate.set(Calendar.MILLISECOND, 0);
+				
+				Calendar toDate= dto.getToDate();
+				toDate.set(Calendar.HOUR_OF_DAY, 23);
+				toDate.set(Calendar.MINUTE, 59);
+				toDate.set(Calendar.SECOND, 59);
+				toDate.set(Calendar.MILLISECOND, 999);
+				predicates.add(
+						criteriaBuilder.between(root.get("created"), fromDate, toDate));
+			}
 			return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
 		};
 	}
+
 }

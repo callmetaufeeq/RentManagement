@@ -106,7 +106,7 @@ public class ReceiptGenerationServiceImpl implements ReceiptService {
 		String address = "";
 		if (r != null) {
 			recpNo = r.getReceiptNo();
-			recpDate = r.getReceiptDate();
+			recpDate = r.getReceiptDate().getTime();
 			tenentName = r.getShopowner().getOwnerName();
 			mobile = r.getShopowner().getMobileNo();
 			address = r.getShopowner().getAddress();

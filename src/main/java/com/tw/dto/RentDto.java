@@ -1,6 +1,6 @@
 package com.tw.dto;
 
-import java.sql.Date;
+import java.util.Calendar;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -17,7 +17,7 @@ public class RentDto {
 	private double totalDepositAmount;
 	private double totalPaid;
 	private double totalRemaining;
-	private Date receiptDate;
+	private Calendar receiptDate;
 	private String status;
 	private String receiptNo;
 	private Long shopownerId;

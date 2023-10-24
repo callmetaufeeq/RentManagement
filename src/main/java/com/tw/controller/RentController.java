@@ -4,14 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tw.dto.HistoryRentDto;
 import com.tw.dto.RentDto;
+import com.tw.dto.RentReportDto;
 import com.tw.service.RentService;
 import com.tw.spec.RentSpecDto;
 
@@ -112,7 +111,7 @@ public class RentController {
 	}
 
 	@PostMapping("/report")
-	public ResponseEntity<?> report(@RequestBody RentSpecDto dto) {
+	public ResponseEntity<?> report(@RequestBody RentReportDto dto) {
 		return rentService.report(dto);
 	}
 }

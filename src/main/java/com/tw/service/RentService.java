@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 
 import com.tw.dto.HistoryRentDto;
 import com.tw.dto.RentDto;
+import com.tw.dto.RentReportDto;
 import com.tw.dto.RentSummaryDTO;
 import com.tw.model.Rent;
 import com.tw.spec.RentSpecDto;
@@ -41,7 +42,7 @@ public interface RentService {
 	
 	ResponseEntity<?> getAmt(Long shopId,String year,String rentType);
 	
-	ResponseEntity<?> report(RentSpecDto dto);
+	ResponseEntity<?> report(RentReportDto dto);
 
 
 }
