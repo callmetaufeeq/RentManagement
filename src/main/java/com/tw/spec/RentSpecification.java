@@ -14,6 +14,7 @@ import jakarta.persistence.criteria.Predicate;
 public class RentSpecification {
 
 	public static Specification<Rent> buildSpecification(RentSpecDto dto) {
+		
 		return (root, query, criteriaBuilder) -> {
 			List<Predicate> predicates = new ArrayList<>();
 

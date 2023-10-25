@@ -1,8 +1,8 @@
 package com.tw.model;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -46,29 +46,29 @@ public class ReportSpecification {
 			}
 
 			if (dto.getReceiptDate() != null) {
-			    Calendar receiptDate = dto.getReceiptDate();
+				Calendar receiptDate = dto.getReceiptDate();
 
-			    // Convert Calendar to Date
-			    Date receiptDateAsDate = receiptDate.getTime();
+				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+				String receiptDateString = dateFormat.format(receiptDate.getTime());
 
-			    predicates.add(criteriaBuilder.equal(root.get("receiptDate"), receiptDateAsDate));
+				predicates.add(
+				criteriaBuilder.like(root.get("receiptDate").as(String.class), "%" + receiptDateString + "%"));
 			}
 
 			if (dto.getFromDate() != null && dto.getToDate() != null) {
-				
-				Calendar fromDate= dto.getFromDate() ;
+
+				Calendar fromDate = dto.getFromDate();
 				fromDate.set(Calendar.HOUR_OF_DAY, 0);
 				fromDate.set(Calendar.MINUTE, 0);
 				fromDate.set(Calendar.SECOND, 0);
 				fromDate.set(Calendar.MILLISECOND, 0);
-				
-				Calendar toDate= dto.getToDate();
+
+				Calendar toDate = dto.getToDate();
 				toDate.set(Calendar.HOUR_OF_DAY, 23);
 				toDate.set(Calendar.MINUTE, 59);
 				toDate.set(Calendar.SECOND, 59);
 				toDate.set(Calendar.MILLISECOND, 999);
-				predicates.add(
-						criteriaBuilder.between(root.get("created"), fromDate, toDate));
+				predicates.add(criteriaBuilder.between(root.get("created"), fromDate, toDate));
 			}
 			return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
 		};
